@@ -36,7 +36,7 @@ and \\( [6, 3] \\) also can be split into \\( [6] \\) and \\( [3] \\).
 Finally, \\( [6], [3] \\) are not dividable
 so we stop breaking down the list.
 
-```
+<pre>
        [6, 3, 7, 1, 9, 2, 5]
          /               \
    [6, 3, 7, 1]       [9, 2, 5]
@@ -44,7 +44,7 @@ so we stop breaking down the list.
  [6, 3]    [7, 1]    [9, 2]  [5]
  /    \    /    \    /    \
 [6]  [3]  [7]  [1]  [9]  [2]
-```
+</pre>
 
 In the same way, the whole list can be divided into
 \\( [6], [3], [7], [1], [9], [2], [5] \\).
@@ -76,77 +76,77 @@ and pick the smaller one since \\( A \\) and \\( B \\) are already sorted.
 
 The following example demonstrate the process of this idea:
 
-```
+<pre>
 () <- search index
 
 A = [(3), 6, 10, 23]
 B = [(2), 7, 50, 55]
 L = []                            // <- 2
-```
+</pre>
 In the first round, \\( 2 \\) is picked since \\( 2 < 3 \\)
 and going to be put into another list \\( L \\).
 
-```
+<pre>
                                   // You can think the left most element
                                   // is shifted one by one
 A = [(3), 6, 10, 23]              // [3, 6, 10, 23]
 B = [2, (7), 50, 55]              // [7, 50, 55]
 L = [2]                           // <- 3
-```
+</pre>
 
 After \\( 2 \\) is picked, we move the index of \\( B \\) from \\( 2 \\) to \\( 7 \\).
 Next, \\( 3 \\) is picked since \\( 3 < 7 \\) and going to be put into \\( L \\).
 
-```
+<pre>
 A = [3, (6), 10, 23]              // [6, 10, 23]
 B = [2, (7), 50, 55]              // [7, 50, 55]
 L = [2, 3]                        // <- 6
-```
+</pre>
 
 After \\( 3 \\) is picked, we move the index of \\( A \\) from \\( 3 \\) to \\( 6 \\).
 Next, \\( 6 \\) is picked since \\( 6 < 7 \\) and going to be put into \\( L \\).
 
-```
+<pre>
 A = [3, 6, (10), 23]              // [10, 23]
 B = [2, (7), 50, 55]              // [7, 50, 55]
 L = [2, 3, 6]                     // <- 7
-```
+</pre>
 
 After \\( 6 \\) is picked, we move the index of \\( A \\) from \\( 6 \\) to \\( 10 \\).
 Next, \\( 7 \\) is picked since \\( 7 < 10 \\) and going to be put into \\( L \\).
 
-```
+<pre>
 A = [3, 6, (10), 23]              // [10, 23]
 B = [2, 7, (50), 55]              // [50, 55]
 L = [2, 3, 6, 7]                  // <- 10
-```
+</pre>
 
 After \\( 7 \\) is picked, we move the index of \\( B \\) from \\( 7 \\) to \\( 50 \\).
 Next, \\( 10 \\) is picked since \\( 10 < 50 \\) and going to be put into \\( L \\).
 
-```
+<pre>
 A = [3, 6, 10, (23)]              // [23]
 B = [2, 7, (50), 55]              // [50, 55]
 L = [2, 3, 6, 7, 10]
-```
+</pre>
 
 After \\( 10 \\) is picked, we move the index of \\( A \\) from \\( 10 \\) to \\( 23 \\).
 Next, \\( 23 \\) is picked since \\( 23 < 50 \\) and going to be put into \\( L \\).
 
-```
+<pre>
 A = [3, 6, 10, 23]                // []
 B = [2, 7, (50), 55]              // [50, 55]
 L = [2, 3, 6, 7, 10, 23]
-```
+</pre>
 
 After \\( 23 \\) is picked, there is no need to compare again
 since the \\( 23 \\) is the last element in \\( A \\).
 
-```
+<pre>
 A = [3, 6, 10, 23]                // []
 B = [2, 7, 50, 55]                // []
 L = [2, 3, 6, 7, 10, 23, 50, 55]
-```
+</pre>
 
 Next, we can append all the rest elements
 from \\( 50 \\) to the end of \\( B \\) into the \\( L \\).
@@ -158,12 +158,12 @@ Another idea to merge the two sorted lists
 \\( A = [3, 6, 10, 23] \\) and \\( B = [2, 7, 50, 55] \\),
 is to couple them together into a list \\( L = A \cup B \\)
 
-```
+<pre>
 () <- element who will be moved
 L = [3, 6, 10, 23, | (2), 7, 50, 55]
 
 // The '|' doesn't exist! It's only a notation for better explanation.
-```
+</pre>
 
 and then move the minimal element of the later list(\\( B \\))
 to the right position of the former list(\\( A \\)).
@@ -171,32 +171,32 @@ to the right position of the former list(\\( A \\)).
 The way for finding right the position is to compare the elements one by one
 from the end of the former list(\\( A \\)) to its head.
 
-```
+<pre>
 () <- element who will be moved
 L = [3, 6, 10, (2), 23, | 7, 50, 55]
-```
+</pre>
 
 In our example, the \\( 2 \\) is swapped with \\( 23 \\) since \\( 2 < 23 \\).
 Then we keep comparing \\( 2 \\) with \\( 10 \\).
 
-```
+<pre>
 () <- element who will be moved
 L = [3, 6, (2), 10, 23, | 7, 50, 55]
-```
+</pre>
 
 Similarly, the \\( 2, 10 \\) are swapped since \\( 2 < 10 \\).
 
-```
+<pre>
 () <- element who will be moved
 L = [3, (2), 6,  10, 23, | 7, 50, 55]
-```
+</pre>
 
 Next, the \\( 2, 6 \\) are swapped since \\( 2 < 6 \\).
 
-```
+<pre>
 () <- element who will be moved
 L = [(2), 3, 6,  10, 23, | 7, 50, 55]
-```
+</pre>
 
 Next, the \\( 2, 3 \\) are swapped since \\( 2 < 3 \\).
 After this round, there is nothing to compare,
@@ -206,36 +206,36 @@ Now \\( A = [2, 3, 6, 10, 23] \\) and \\( B = [7, 50, 55] \\)
 In the same way, we can do this process again with \\( 7 \\).
 It's the minimal element of the later list \\( B \\) now.
 
-```
+<pre>
 () <- element who will be moved
 L = [2, 3, 6, 10, 23, | (7), 50, 55]
 L = [2, 3, 6, 10, (7), 23, | 50, 55]
 L = [2, 3, 6, (7), 10, 23, | 50, 55]
 
 L = [2, 3, 6, 7, 10, 23, | 50, 55]
-```
+</pre>
 
 After this round, \\( A = [2, 3, 6, 7, 10, 23] \\) and \\( B = [50, 55] \\).
 
 Then do it again with with \\( 50 \\).
 
-```
+<pre>
 () <- element who will be moved
 L = [2, 3, 6,  7, 10, 23, | (50), 55]
 
 L = [2, 3, 6,  7, 10, 23, 50, | 55]
-```
+</pre>
 
 However, \\( 50 \\) doesn't move because \\( 23 < 50 \\).
 We just need to append \\( 50 \\) to the end of the former list \\( A \\).
 After this round, \\( A = [2, 3, 6, 7, 10, 23, 50] \\) and \\( B = [55] \\).
 
-```
+<pre>
 () <- element who will be moved
 L = [2, 3, 6,  7, 10, 23, 50, | (55)]
 
 L = [2, 3, 6,  7, 10, 23, 50, 55]
-```
+</pre>
 
 It's same to \\( 55 \\).
 It doesn't need to be moved since \\( 50 < 55 \\),
@@ -309,7 +309,7 @@ to read it.
 
 #### Correctness of _Merge_
 
-```
+<pre>
   List L
 
         <------   sorted   ------> <------   sorted  ------->
@@ -337,7 +337,7 @@ to read it.
   i: The index of the first element in L[l...m] that has NOT been merged yet
   j: The index of the first element in L[m+1...r] that has NOT been merged yet
   k: The index of next merged element copied from L[i] or L[j]
-```
+</pre>
 
 __Loop Invariant__:
 At the beginning of the while-loop, the following conditions hold:
@@ -398,7 +398,7 @@ Then we use loop-invariants to prove:
 
 ## Complexity
 
-```
+<pre>
   ^    +------------------------------------------------------+   Merge
   |    |                           N                          |   Complexity
   |    +------------------------------------------------------+
@@ -424,7 +424,7 @@ Then we use loop-invariants to prove:
   N: the number of list elements.
   K: K layers from N to 1.
      N/2^k = 1 => N = 2^K => K = log_2(N)
-```
+</pre>
 
 The above figure is the __recursion tree__ of _merge sort_.
 The list containing \\( N \\) elements is recursively divided to sort
