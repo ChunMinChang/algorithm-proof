@@ -1,0 +1,692 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Merge sort - Algorithm Proof</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../sorting/sorting.html"><strong aria-hidden="true">1.</strong> Sorting</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sorting/selection_sort.html"><strong aria-hidden="true">1.1.</strong> Selection sort</a></li><li class="chapter-item expanded "><a href="../sorting/insertion_sort.html"><strong aria-hidden="true">1.2.</strong> Insertion sort</a></li><li class="chapter-item expanded "><a href="../sorting/bubble_sort.html"><strong aria-hidden="true">1.3.</strong> Bubble sort</a></li><li class="chapter-item expanded "><a href="../sorting/merge_sort.html" class="active"><strong aria-hidden="true">1.4.</strong> Merge sort</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sorting/naive_inplace_merge.html"><strong aria-hidden="true">1.4.1.</strong> Naive in-place merge</a></li></ol></li><li class="chapter-item expanded "><a href="../sorting/quick_sort.html"><strong aria-hidden="true">1.5.</strong> Quick sort</a></li><li class="chapter-item expanded "><a href="../sorting/heap_sort.html"><strong aria-hidden="true">1.6.</strong> Heap sort</a></li></ol></li><li class="chapter-item expanded "><a href="../graph/graph.html"><strong aria-hidden="true">2.</strong> Graph</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/shortest_path.html"><strong aria-hidden="true">2.1.</strong> Shortest path</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/Floyd_Warshall.html"><strong aria-hidden="true">2.1.1.</strong> Floyd–Warshall</a></li><li class="chapter-item expanded "><a href="../graph/Dijkstra.html"><strong aria-hidden="true">2.1.2.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="../graph/Bellman_Ford_Moore.html"><strong aria-hidden="true">2.1.3.</strong> Bellman-Ford-Moore</a></li><li class="chapter-item expanded "><a href="../graph/Shortest_Path_Faster_Algorithm.html"><strong aria-hidden="true">2.1.4.</strong> Shortest Path Faster Algorithm</a></li></ol></li><li class="chapter-item expanded "><a href="../graph/minimal_spanning_tree.html"><strong aria-hidden="true">2.2.</strong> Minimal spanning tree</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/Kruskal.html"><strong aria-hidden="true">2.2.1.</strong> Kruskal</a></li><li class="chapter-item expanded "><a href="../graph/Prim.html"><strong aria-hidden="true">2.2.2.</strong> Prim</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../search/search.html"><strong aria-hidden="true">3.</strong> Search</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../search/binary_search.html"><strong aria-hidden="true">3.1.</strong> Binary search</a></li><li class="chapter-item expanded "><a href="../search/interpolation_search.html"><strong aria-hidden="true">3.2.</strong> Interpolation search</a></li><li class="chapter-item expanded "><a href="../search/fibonacci_search.html"><strong aria-hidden="true">3.3.</strong> Fibonacci search</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Algorithm Proof</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#merge-sort" id="merge-sort">Merge sort</a></h1>
+<h2><a class="header" href="#idea" id="idea">Idea</a></h2>
+<p><em>Merge sort</em> is an efficient algorithm that
+applies the concepts of <a href="https://en.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm"><em>divide and conquer</em></a> to sort the list.</p>
+<p>The key idea of <a href="https://en.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm"><em>divide and conquer</em></a> is to recursively break down the problems
+into two or more sub-problems and they are same or related to the original problem,
+until these divided sub-problems are simple enough to solve directly.
+Then, the solutions of the original problem can be combined and derived
+by the solutions of all the sub-problems.</p>
+<h3><a class="header" href="#divide-and-conquer" id="divide-and-conquer">Divide and conquer</a></h3>
+<p>The calculation of <a href="https://en.wikipedia.org/wiki/Fibonacci_number" title="Fibonacci number"><em>Fibonacci number</em></a>, \( F(n) = F(n-1) + F(n-2) \),
+is one example.
+To calculate \( F(n) \), it needs to find \( F(n-1) \) and \( F(n-2) \).
+Similarly, to calculate \( F(n-1) \), it needs to \( F(n-2) \) and \( F(n-3) \).
+The sub-problems for calculating \( F(n-1) \) and \( F(n-2) \) have same form
+as the one for \( F(n) \).</p>
+<p>Recursively, we will need to get \( F(n-1) \), \( F(n-2) \), ..., \( F(2) \), \( F(1) \)
+and \( F(1) \) and \( F(2) \) are easy enough to solve directly. They are both \( 1 \).
+Thus, \( F(3) = F(2) + F(1) = 2 \), \( F(4) = F(3) + F(2) = 3 \), ... and then \( F(n) \)
+can be computed.</p>
+<h3><a class="header" href="#dividing-the-sorting-problem" id="dividing-the-sorting-problem">Dividing the sorting-problem</a></h3>
+<p>Let's apply this concept to the sorting problem.
+If we want to sort the list \( L = [6, 3, 7, 1, 9, 2, 5] \),
+the sub-lists \( [6, 3, 7, 1], [9, 2, 5] \) must also be sorted,
+so we can narrow down our problem scope for handling the sub-lists.
+Next, \( [6, 3, 7, 1] \) can be divided to \( [6, 3], [7, 1] \)
+and \( [6, 3] \) also can be split into \( [6] \) and \( [3] \).
+Finally, \( [6], [3] \) are not dividable
+so we stop breaking down the list.</p>
+<pre>
+       [6, 3, 7, 1, 9, 2, 5]
+         /               \
+   [6, 3, 7, 1]       [9, 2, 5]
+    /        \          /     \
+ [6, 3]    [7, 1]    [9, 2]  [5]
+ /    \    /    \    /    \
+[6]  [3]  [7]  [1]  [9]  [2]
+</pre>
+<p>In the same way, the whole list can be divided into
+\( [6], [3], [7], [1], [9], [2], [5] \).</p>
+<h3><a class="header" href="#conquering-the-sub-problems" id="conquering-the-sub-problems">Conquering the sub-problems</a></h3>
+<p>After there is only one element left,
+the subproblem is solved by nature since it's already sorted.</p>
+<p>However, the problem becomes</p>
+<blockquote>
+<p>how do we combine these sorted chunks into a sorted list</p>
+</blockquote>
+<p>We need a method that can merge two sorted lists,
+\( L_1[1...X] \) and \( L_2[1...Y] \), where \( X, Y \geq 1 \),
+into a bigger sorted list \( L[1...(X+Y)] \).</p>
+<h3><a class="header" href="#combining-all-the-results-of-sub-sorting-problem" id="combining-all-the-results-of-sub-sorting-problem">Combining all the results of sub-sorting-problem</a></h3>
+<p>Suppose we have two sorted lists \( A = [3, 6, 10, 23] \) and \( B = [2, 7, 50, 55] \).
+We provide two ways to merge them into a sorted list.</p>
+<h4><a class="header" href="#picking-the-smallest-elements-one-by-one" id="picking-the-smallest-elements-one-by-one">Picking the smallest elements one by one</a></h4>
+<p>The simplest method is to pick the smallest elements iteratively
+by searching both lists from the minimal to maximal.</p>
+<p>We only need to compare the left most elements of both lists
+and pick the smaller one since \( A \) and \( B \) are already sorted.</p>
+<p>The following example demonstrate the process of this idea:</p>
+<pre>
+() <- search index
+
+A = [(3), 6, 10, 23]
+B = [(2), 7, 50, 55]
+L = []                            // <- 2
+</pre>
+<p>In the first round, \( 2 \) is picked since \( 2 &lt; 3 \)
+and going to be put into another list \( L \).</p>
+<pre>
+                                  // You can think the left most element
+                                  // is shifted one by one
+A = [(3), 6, 10, 23]              // [3, 6, 10, 23]
+B = [2, (7), 50, 55]              // [7, 50, 55]
+L = [2]                           // <- 3
+</pre>
+<p>After \( 2 \) is picked, we move the index of \( B \) from \( 2 \) to \( 7 \).
+Next, \( 3 \) is picked since \( 3 &lt; 7 \) and going to be put into \( L \).</p>
+<pre>
+A = [3, (6), 10, 23]              // [6, 10, 23]
+B = [2, (7), 50, 55]              // [7, 50, 55]
+L = [2, 3]                        // <- 6
+</pre>
+<p>After \( 3 \) is picked, we move the index of \( A \) from \( 3 \) to \( 6 \).
+Next, \( 6 \) is picked since \( 6 &lt; 7 \) and going to be put into \( L \).</p>
+<pre>
+A = [3, 6, (10), 23]              // [10, 23]
+B = [2, (7), 50, 55]              // [7, 50, 55]
+L = [2, 3, 6]                     // <- 7
+</pre>
+<p>After \( 6 \) is picked, we move the index of \( A \) from \( 6 \) to \( 10 \).
+Next, \( 7 \) is picked since \( 7 &lt; 10 \) and going to be put into \( L \).</p>
+<pre>
+A = [3, 6, (10), 23]              // [10, 23]
+B = [2, 7, (50), 55]              // [50, 55]
+L = [2, 3, 6, 7]                  // <- 10
+</pre>
+<p>After \( 7 \) is picked, we move the index of \( B \) from \( 7 \) to \( 50 \).
+Next, \( 10 \) is picked since \( 10 &lt; 50 \) and going to be put into \( L \).</p>
+<pre>
+A = [3, 6, 10, (23)]              // [23]
+B = [2, 7, (50), 55]              // [50, 55]
+L = [2, 3, 6, 7, 10]
+</pre>
+<p>After \( 10 \) is picked, we move the index of \( A \) from \( 10 \) to \( 23 \).
+Next, \( 23 \) is picked since \( 23 &lt; 50 \) and going to be put into \( L \).</p>
+<pre>
+A = [3, 6, 10, 23]                // []
+B = [2, 7, (50), 55]              // [50, 55]
+L = [2, 3, 6, 7, 10, 23]
+</pre>
+<p>After \( 23 \) is picked, there is no need to compare again
+since the \( 23 \) is the last element in \( A \).</p>
+<pre>
+A = [3, 6, 10, 23]                // []
+B = [2, 7, 50, 55]                // []
+L = [2, 3, 6, 7, 10, 23, 50, 55]
+</pre>
+<p>Next, we can append all the rest elements
+from \( 50 \) to the end of \( B \) into the \( L \).
+Finally, we get a sort list \( L \).</p>
+<h4><a class="header" href="#swapping-the-elements-one-by-one" id="swapping-the-elements-one-by-one">Swapping the elements one by one</a></h4>
+<p>Another idea to merge the two sorted lists
+\( A = [3, 6, 10, 23] \) and \( B = [2, 7, 50, 55] \),
+is to couple them together into a list \( L = A \cup B \)</p>
+<pre>
+() <- element who will be moved
+L = [3, 6, 10, 23, | (2), 7, 50, 55]
+
+// The '|' doesn't exist! It's only a notation for better explanation.
+</pre>
+<p>and then move the minimal element of the later list(\( B \))
+to the right position of the former list(\( A \)).</p>
+<p>The way for finding right the position is to compare the elements one by one
+from the end of the former list(\( A \)) to its head.</p>
+<pre>
+() <- element who will be moved
+L = [3, 6, 10, (2), 23, | 7, 50, 55]
+</pre>
+<p>In our example, the \( 2 \) is swapped with \( 23 \) since \( 2 &lt; 23 \).
+Then we keep comparing \( 2 \) with \( 10 \).</p>
+<pre>
+() <- element who will be moved
+L = [3, 6, (2), 10, 23, | 7, 50, 55]
+</pre>
+<p>Similarly, the \( 2, 10 \) are swapped since \( 2 &lt; 10 \).</p>
+<pre>
+() <- element who will be moved
+L = [3, (2), 6,  10, 23, | 7, 50, 55]
+</pre>
+<p>Next, the \( 2, 6 \) are swapped since \( 2 &lt; 6 \).</p>
+<pre>
+() <- element who will be moved
+L = [(2), 3, 6,  10, 23, | 7, 50, 55]
+</pre>
+<p>Next, the \( 2, 3 \) are swapped since \( 2 &lt; 3 \).
+After this round, there is nothing to compare,
+so the \( 2 \) is moved to its right position.
+Now \( A = [2, 3, 6, 10, 23] \) and \( B = [7, 50, 55] \)</p>
+<p>In the same way, we can do this process again with \( 7 \).
+It's the minimal element of the later list \( B \) now.</p>
+<pre>
+() <- element who will be moved
+L = [2, 3, 6, 10, 23, | (7), 50, 55]
+L = [2, 3, 6, 10, (7), 23, | 50, 55]
+L = [2, 3, 6, (7), 10, 23, | 50, 55]
+
+L = [2, 3, 6, 7, 10, 23, | 50, 55]
+</pre>
+<p>After this round, \( A = [2, 3, 6, 7, 10, 23] \) and \( B = [50, 55] \).</p>
+<p>Then do it again with with \( 50 \).</p>
+<pre>
+() <- element who will be moved
+L = [2, 3, 6,  7, 10, 23, | (50), 55]
+
+L = [2, 3, 6,  7, 10, 23, 50, | 55]
+</pre>
+<p>However, \( 50 \) doesn't move because \( 23 &lt; 50 \).
+We just need to append \( 50 \) to the end of the former list \( A \).
+After this round, \( A = [2, 3, 6, 7, 10, 23, 50] \) and \( B = [55] \).</p>
+<pre>
+() <- element who will be moved
+L = [2, 3, 6,  7, 10, 23, 50, | (55)]
+
+L = [2, 3, 6,  7, 10, 23, 50, 55]
+</pre>
+<p>It's same to \( 55 \).
+It doesn't need to be moved since \( 50 &lt; 55 \),
+so just append it to the \( A \).
+Finally, \( A = [2, 3, 6, 7, 10, 23, 50, 55] \) and \( B = [] \) is empty now.
+Now we have a sorted list \( L = A \cup B = A \)!</p>
+<h4><a class="header" href="#which-merge-method-is-better" id="which-merge-method-is-better">Which merge method is better</a></h4>
+<p>The first method use <strong>extra space</strong> to store the sorted results,
+rather than the second in-place solution.
+On the other hand, the second method needs <strong>more swapping executions</strong>
+and its a linear operation.
+For better performance, we take the first method as our approach here.</p>
+<p>Actually, there is a way to save the extra space
+and it works as fast as the first method above.
+However, it's complicated.
+I will write another post for illustrating it.
+Please refer <em>In-place merge sort</em> in <a href="https://github.com/liuxinyu95/AlgoXY/releases/download/v0.618033/elementary-algorithms.pdf" title="Elementary Algorithms">Elementary Algorithms</a>
+to read it.</p>
+<h2><a class="header" href="#algorithm" id="algorithm">Algorithm</a></h2>
+<p>\[
+\begin{aligned}
+&amp; MergeSort(L): \newline
+&amp; \space \space \space \space mergeSort(L, 1, \vert L \vert)
+\end{aligned}
+\]</p>
+<p>\[
+\begin{aligned}
+&amp; mergeSort(L, l, r): \newline
+&amp; \space \space \space \space \text{if } l &lt; r: \newline
+&amp; \space \space \space \space \space \space \space \space m \leftarrow \lfloor \frac{l+r}{2} \rfloor \newline
+&amp; \space \space \space \space \space \space \space \space mergeSort(L, l, m) \newline
+&amp; \space \space \space \space \space \space \space \space mergeSort(L, m+1, r) \newline
+&amp; \space \space \space \space \space \space \space \space merge(L, l, m, r)
+\end{aligned}
+\]</p>
+<p>\[
+\begin{aligned}
+&amp; merge(L, l, m, r): \newline
+&amp; \space \space \space \space L^\prime \leftarrow [] \newline
+&amp; \space \space \space \space i \leftarrow l, j \leftarrow m+1, k \leftarrow l \newline
+&amp; \space \space \space \space \text{while } i \leq m \text{ and } j \leq r: \newline
+&amp; \space \space \space \space \space \space \space \space \text{if } L[i] &lt; L[j]: \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space L^\prime[k] \leftarrow L[i] \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space i \leftarrow i + 1 \newline
+&amp; \space \space \space \space \space \space \space \space \text{else}: \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space L^\prime[k] \leftarrow L[j] \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space j \leftarrow j + 1 \newline
+&amp; \space \space \space \space \space \space \space \space k \leftarrow k + 1 \newline
+&amp; \space \space \space \space \text{while } i \leq m: \newline
+&amp; \space \space \space \space \space \space \space \space L^\prime[k] \leftarrow L[i] \newline
+&amp; \space \space \space \space \space \space \space \space i \leftarrow i + 1 \newline
+&amp; \space \space \space \space \space \space \space \space k \leftarrow k + 1 \newline
+&amp; \space \space \space \space \text{while } j \leq r: \newline
+&amp; \space \space \space \space \space \space \space \space L^\prime[k] \leftarrow L[j] \newline
+&amp; \space \space \space \space \space \space \space \space j \leftarrow j + 1 \newline
+&amp; \space \space \space \space \space \space \space \space k \leftarrow k + 1 \newline
+&amp; \space \space \space \space \text{for } i \leftarrow l \text{ to } r: \newline
+&amp; \space \space \space \space \space \space \space \space L[i] \leftarrow L^\prime[i]
+\end{aligned}
+\]</p>
+<h3><a class="header" href="#proof" id="proof">Proof</a></h3>
+<h4><a class="header" href="#correctness-of-merge" id="correctness-of-merge">Correctness of <em>Merge</em></a></h4>
+<pre>
+  List L
+
+        <------   sorted   ------> <------   sorted  ------->
+        <- merged -> <---  A  ---> <- merged -> <---  B  --->
+  -----+---+--------+---+-----+---+-----+------+---+-----+---+-----
+   ... | l | ...... | i | ... | m | m+1 | .... | j | ... | r | ...
+  -----+---+--------+---+-----+---+-----+------+---+-----+---+-----
+                      ^                          ^
+                head of sublist A          head of sublist B
+
+  List L'
+
+   <--   merged  --> <---   empty   --->
+  +---+-------+-----+---+-------+-------+
+  | 1 |  ...  | k-1 | k | ..... | r-l+1 |
+  +---+-------+-----+---+-------+-------+
+                      ^
+                head of empty area of list L'
+
+  L[l...m]    : the sorted sublists for merging with L[m+1...r]
+  L[m+1...r]  : the sorted sublists for merging with L[l...m]
+  A, B        : the sublists containing elements that have NOT been merged yet
+  L'[1...k-1] : the merged list from L[l...i-1] and L[m+1...j-1]
+
+  i: The index of the first element in L[l...m] that has NOT been merged yet
+  j: The index of the first element in L[m+1...r] that has NOT been merged yet
+  k: The index of next merged element copied from L[i] or L[j]
+</pre>
+<p><strong>Loop Invariant</strong>:
+At the beginning of the while-loop, the following conditions hold:</p>
+<ol>
+<li>Sublists \( L[i...m] \) and \( L[j...r] \) are sorted</li>
+<li>\( L^\prime \) holds the elements from sublists \( L[l...i-1] \) and \( L[m+1...j-1] \)</li>
+<li>All elements in \( L^\prime[1...k-1] \) is less or equal than
+sublists \( L[i...m] \) and \( L[j...r] \)</li>
+<li>\( L^\prime \) are sorted.
+Formally, \( \forall i \in [l + 1, r], L^\prime[i - 1] \leq L^\prime[i] \)</li>
+</ol>
+<p>Then we use loop-invariants to prove:</p>
+<ul>
+<li>Initialization: At the very beginning when \( k = 1, i = l, j = m+1 \)
+<ul>
+<li>the input \( L[l...m], L[m+1...r] \) are sorted so <em>1</em> holds</li>
+<li>the list \( L^\prime \) is empty so <em>2, 3, 4</em> hold</li>
+</ul>
+</li>
+<li>Maintenance: Consider the iteration \( k = x \)
+<ul>
+<li><em>1</em> is preserved since there is no change in \( L \)</li>
+<li><em>2</em> is preserved because
+<ul>
+<li>If \( j &gt; r \lor (i \leq m \land L[i] &lt; L[j]) \), \( L^\prime[k] \leftarrow L[i] \)
+<ul>
+<li>then \( k \leftarrow k+1, i \leftarrow i+1 \)</li>
+<li><em>3</em> is preserved because \( L[k-1] = L[i-1] &lt; L[j] \leq L[j+1] \leq ... \leq L[r] \)
+and \( L[k-1] = L[i-1] \leq L[i] \leq ... \leq L[m] \)</li>
+</ul>
+</li>
+<li>Otherwise, \( L^\prime[k] \leftarrow L[j] \)
+<ul>
+<li>then \( k \leftarrow k+1, j \leftarrow j+1 \)</li>
+<li><em>3</em> is preserved because \( L[k-1] = L[j-1] &lt; L[j] \leq L[j+1] \leq ... \leq L[r] \)
+and \( L[k-1] = L[j-1] \leq L[i] \leq L[i+1] \leq ... \leq L[m] \)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The previous appended element must be smaller than
+the current selected minimal element or <em>1</em> is false</li>
+<li>By <em>3</em>, the next selected minimal element will be larger than current one</li>
+<li>So <em>4</em> is also preserved</li>
+</ul>
+</li>
+<li>Termination
+<ul>
+<li>By <strong>2</strong>, \( L^\prime \) consists of the elements in \( L[l...r] \)</li>
+<li>By <strong>4</strong>, \( L[l...r] = L^\prime[l...r] \) are sorted</li>
+</ul>
+</li>
+</ul>
+<h4><a class="header" href="#correctness-of-merge-sort" id="correctness-of-merge-sort">Correctness of <em>Merge Sort</em></a></h4>
+<blockquote>
+<p>Given a list \( L \) with \( N \) elements,
+the \( L \) can be sorted
+by applying the above the <em>MergeSort</em> with \( l = 1, r = N \).</p>
+</blockquote>
+<ul>
+<li>Base step: When \( N = 1 \), it's trivial.</li>
+<li>Induction Hypothesis:
+Suppose this assumption holds when list has \( N = 1, 2, ..., k \) elements</li>
+<li>Induction Step: When \( N = k + 1 \)
+<ul>
+<li>the list \( L \) is divide to \( L[1...m] \)(\( m \) elements)
+and \( L[m+1...N] \)(\( N - m \) elements)</li>
+<li>so \( m = \lfloor \frac{1+(k+1)}{2} \rfloor = \lfloor \frac{k}{2} \rfloor + 1 \leq k \)</li>
+<li>\( 1 \leq m \to 0 \leq m-1  \)
+<ul>
+<li>\(  \to k \leq k-1+m  \)</li>
+<li>\(  \to k+1 \leq k+m  \)</li>
+<li>\(  \to (k+1)-m \leq k  \)</li>
+<li>\(  \to N-m \leq k \)</li>
+</ul>
+</li>
+<li>By our hypothesis, \( L[1...m] \) and \( L[m+1...N] \) can be sorted</li>
+<li>By the proved correctness of <em>merge</em> above,
+the merged \( L[1...m] \) and \( L[m+1...N] \) is also sorted,
+so the proof is done</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#complexity" id="complexity">Complexity</a></h2>
+<pre>
+  ^    +------------------------------------------------------+   Merge
+  |    |                           N                          |   Complexity
+  |    +------------------------------------------------------+
+  |                 |                              |
+  |                 v                              v
+  |    +------------------------+    +------------------------+
+  |    |           N/2          |    |           N/2          |   2 * O(N/2)
+  |    +------------------------+    +------------------------+
+  |         |              |              |              |
+            v              v              v              v
+  K    +---------+    +---------+    +---------+    +---------+
+       |   N/4   |    |   N/4   |    |   N/4   |    |   N/4   |   4 * O(N/4)
+  |    +---------+    +---------+    +---------+    +---------+
+  |      |     |        |     |        |     |        |     |
+  |      v     v        v     v        v     v        v     v
+  |
+  |                        .  .  .  .  .  .                       2^i * O(N/(2^i))
+  |
+  |    +---+  +---+  +---+                                +---+
+  |    | 1 |  | 1 |  | 1 |  .  .  .  .  .  .  .  .  .  .  | 1 |   N * O(1)
+  v    +---+  +---+  +---+                                +---+
+
+  N: the number of list elements.
+  K: K layers from N to 1.
+     N/2^k = 1 => N = 2^K => K = log_2(N)
+</pre>
+<p>The above figure is the <strong>recursion tree</strong> of <em>merge sort</em>.
+The list containing \( N \) elements is recursively divided to sort
+until there is only one elements.
+Suppose that there is \( K \) times of division, therefore,</p>
+<p>\[
+\begin{aligned}
+\frac{ N }{ 2^K }   &amp;= 1 \newline
+\to                 N &amp;= 2^K \newline
+\to                 K &amp;= \log_{ 2 }N
+\end{aligned}
+\]</p>
+<p>On the other hand, the time complexity
+depends on the performance of <em>merge</em> \( T_{merge}(N) \).
+The used <em>merge</em> here is the basic version.
+It iteratively picks the minimal elements from both sublists
+then copied to another list \( L^\prime \).
+After all the elements in one sublist are all selected,
+we move the rest elements in the other sublist to list \( L^\prime \).
+Finally, we assigned \( L[i] \leftarrow L^\prime[i] \), \( \forall i \in [1, N] \).
+Thus, \( T_{merge}(N) \) can be defined as</p>
+<p>\[
+T_{merge}(N) = c \cdot N
+\]</p>
+<p>where \( c \) is a constant reflecting the basic operations
+like comparisons or assignments for merging routine.</p>
+<h3><a class="header" href="#by-the-recursion-tree" id="by-the-recursion-tree">By the recursion tree</a></h3>
+<p>From the above figure, the total time for the <em>merge sort</em> is</p>
+<p>\[
+\begin{aligned}
+Time &amp;= 2 \cdot c \cdot \frac{N}{2} +4 \cdot c \cdot \frac{N}{4} + 8 \cdot c \cdot \frac{N}{8} + ... + N \cdot c \cdot 1 \newline
+&amp;= K \cdot ( c \cdot N)
+\end{aligned}
+\]
+, where \( K \) is the number of terms in the above equation.</p>
+<p>The term is \( 2^K \cdot c \cdot \frac{N}{2^K} \) 
+and it is from \( 2 \cdot c \cdot \frac{N}{2} \) to \( N \cdot c \cdot 1 \),
+so we have \( K = \log_{ 2 }N \) terms.
+As a result,</p>
+<p>\[
+Time = c \cdot N \cdot \log_{ 2 }N
+\]</p>
+<p>Thus, the time complexity is \( \mathcal{O}(N \log N) \).</p>
+<h3><a class="header" href="#by-telescoping" id="by-telescoping">By telescoping</a></h3>
+<p>Formally, since the <em>merge sort</em> repeatedly breaks down the \( N \)-elements list
+into two \( \frac{N}{2} \)-elements sublists,
+the amount of time that <em>merge sort</em>, \( T_{sort}(N) \),
+can be written as follows:</p>
+<p>\[
+\begin{aligned}
+T_{sort}(N)
+&amp;= T_{sort}(\frac{N}{2}) + T_{sort}(\frac{N}{2}) + T_{merge}(N) \newline
+&amp;= 2 \cdot T_{sort}(\frac{N}{2}) + T_{merge}(N) \newline
+&amp;= 2 \cdot T_{sort}(\frac{N}{2}) + c \cdot N
+\end{aligned}
+\]</p>
+<p>\[
+\begin{aligned}
+T_{sort}(N)
+&amp;= 2 \cdot T_{sort}(\frac{N}{2}) + c \cdot N \newline
+&amp;= 2 \cdot (2 \cdot T_{sort}(\frac{N}{4}) + c \cdot \frac{N}{2}) + c \cdot N \newline
+&amp;= 2^2 \cdot T_{sort}(\frac{N}{4}) + 2 \cdot c \cdot N \newline
+&amp;= 2^2 \cdot (2 \cdot T_{sort}(\frac{N}{8}) + c \cdot \frac{N}{4}) + 2 \cdot c \cdot N \newline
+&amp;= 2^3 \cdot T_{sort}(\frac{N}{4}) + 3 \cdot c \cdot N \newline
+&amp;= ... \newline
+&amp;= 2^K \cdot T_{sort}(\frac{N}{2^K}) + K \cdot c \cdot N \newline
+&amp;= N \cdot T_{sort}(1) + K \cdot c \cdot N \newline
+&amp;= N \cdot 1 + K \cdot c \cdot N \newline
+&amp;= N + c \cdot N \cdot \log_{ 2 }N
+\end{aligned}
+\]</p>
+<p>Thus, the time complexity is \( \mathcal{O}(N \log N) \).</p>
+<h2><a class="header" href="#implementation" id="implementation">Implementation</a></h2>
+<script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=merge_sort.cpp"></script>
+<h2><a class="header" href="#appendix" id="appendix">Appendix</a></h2>
+<ul>
+<li><a href="naive_inplace_merge.html">Naive in-pace merge</a></li>
+</ul>
+<!-- - [In-pace merge sort with working area][wimsort] -->
+<h2><a class="header" href="#reference" id="reference">Reference</a></h2>
+<ul>
+<li><a href="http://www-bcf.usc.edu/%7Edkempe/CS104/11-07.pdf" title="2013 CS104: Recursive Sorting Algorithms and their Analysis">CS104</a></li>
+<li><a href="http://www.cs.princeton.edu/courses/archive/spr07/cos226/lectures/04MergeQuick.pdf" title="Mergesort and Quicksort">COS226</a></li>
+<li><a href="http://www.cs.mcgill.ca/%7Edprecup/courses/IntroCS/Lectures/comp250-lecture16.pdf" title="Lecture 16: MergeSort proof of correctness, and running time">COMP250</a></li>
+<li><a href="http://www.inf.unibz.it/%7Enutt/DSA1112/DSALabs/sols2.pdf" title="Data Structures and Algorithms">DSA1112</a></li>
+<li><a href="https://www.cs.rochester.edu/%7Egildea/csc282/slides/C02-start.pdf" title="Getting Started">CSC282</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../sorting/bubble_sort.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../sorting/naive_inplace_merge.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../sorting/bubble_sort.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../sorting/naive_inplace_merge.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bubble sort - Algorithm Proof</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../sorting/sorting.html"><strong aria-hidden="true">1.</strong> Sorting</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sorting/selection_sort.html"><strong aria-hidden="true">1.1.</strong> Selection sort</a></li><li class="chapter-item expanded "><a href="../sorting/insertion_sort.html"><strong aria-hidden="true">1.2.</strong> Insertion sort</a></li><li class="chapter-item expanded "><a href="../sorting/bubble_sort.html" class="active"><strong aria-hidden="true">1.3.</strong> Bubble sort</a></li><li class="chapter-item expanded "><a href="../sorting/merge_sort.html"><strong aria-hidden="true">1.4.</strong> Merge sort</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sorting/naive_inplace_merge.html"><strong aria-hidden="true">1.4.1.</strong> Naive in-place merge</a></li></ol></li><li class="chapter-item expanded "><a href="../sorting/quick_sort.html"><strong aria-hidden="true">1.5.</strong> Quick sort</a></li><li class="chapter-item expanded "><a href="../sorting/heap_sort.html"><strong aria-hidden="true">1.6.</strong> Heap sort</a></li></ol></li><li class="chapter-item expanded "><a href="../graph/graph.html"><strong aria-hidden="true">2.</strong> Graph</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/shortest_path.html"><strong aria-hidden="true">2.1.</strong> Shortest path</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/Floyd_Warshall.html"><strong aria-hidden="true">2.1.1.</strong> Floyd–Warshall</a></li><li class="chapter-item expanded "><a href="../graph/Dijkstra.html"><strong aria-hidden="true">2.1.2.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="../graph/Bellman_Ford_Moore.html"><strong aria-hidden="true">2.1.3.</strong> Bellman-Ford-Moore</a></li><li class="chapter-item expanded "><a href="../graph/Shortest_Path_Faster_Algorithm.html"><strong aria-hidden="true">2.1.4.</strong> Shortest Path Faster Algorithm</a></li></ol></li><li class="chapter-item expanded "><a href="../graph/minimal_spanning_tree.html"><strong aria-hidden="true">2.2.</strong> Minimal spanning tree</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/Kruskal.html"><strong aria-hidden="true">2.2.1.</strong> Kruskal</a></li><li class="chapter-item expanded "><a href="../graph/Prim.html"><strong aria-hidden="true">2.2.2.</strong> Prim</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../search/search.html"><strong aria-hidden="true">3.</strong> Search</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../search/binary_search.html"><strong aria-hidden="true">3.1.</strong> Binary search</a></li><li class="chapter-item expanded "><a href="../search/interpolation_search.html"><strong aria-hidden="true">3.2.</strong> Interpolation search</a></li><li class="chapter-item expanded "><a href="../search/fibonacci_search.html"><strong aria-hidden="true">3.3.</strong> Fibonacci search</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Algorithm Proof</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#bubble-sort" id="bubble-sort">Bubble sort</a></h1>
+<h2><a class="header" href="#idea" id="idea">Idea</a></h2>
+<p>The basic concept is same to <a href="selection_sort.html" title="Selection Sort"><em>Selection Sort</em></a>.
+The list is rearranged from minimal to maximal value
+by picking the maximal(or minimal) value from the unsorted list iteratively.</p>
+<p>In <em>selection sort</em>, the minimal element is selected after searching whole list.
+On the other hand, <em>bubble sort</em> iteratively compares two neighbor elements
+and swaps the elements if the left element is greater(or less) than
+the right one, from the list head to the list tail.
+Therefore, the maximal, the second-maximal, ... values will be
+&quot;bubbled&quot; up to the tail of list one by one.</p>
+<p>Take L = \([ 5, 3, 4, 2, 1 ]\) as an example:</p>
+<ul>
+<li>Step 1: Move the <strong>maximal</strong> value to the <strong>last</strong> position of the list.
+<ul>
+<li>\(5 &gt; 3\) so swap them. \(L = [ 3, 5, 4, 2, 1 ]\)</li>
+<li>\(5 &gt; 4\) so swap them. \(L = [ 3, 4, 5, 2, 1 ]\)</li>
+<li>\(5 &gt; 2\) so swap them. \(L = [ 3, 4, 2, 5, 1 ]\)</li>
+<li>\(5 &gt; 1\) so swap them. \(L = [ 3, 4, 2, 1, 5 ]\)</li>
+<li>The maximal value \(5\) is moved to the last of the list</li>
+</ul>
+</li>
+<li>Step 2: Move the <strong>second-maximal</strong> value to the <strong>second-last</strong> position of the list.
+<ul>
+<li>\(3 &lt; 4\) so do nothing.</li>
+<li>\(4 &gt; 2\) so swap them. \(L = [ 3, 2, 4, 1, 5 ]\)</li>
+<li>\(4 &gt; 1\) so swap them. \(L = [ 3, 2, 1, 4, 5 ]\)</li>
+<li>The second-maximal value \(4\) is moved to the second-last of the list</li>
+</ul>
+</li>
+<li>Step 3: Move the <strong>third-maximal</strong> value to the <strong>third-last</strong> position of the list.
+<ul>
+<li>\(3 &gt; 2\) so swap them. \(L = [ 2, 3, 1, 4, 5 ]\)</li>
+<li>\(3 &gt; 1\) so swap them. \(L = [ 2, 1, 3, 4, 5 ]\)</li>
+<li>The third-maximal value \(3\) is moved to the third-last of the list</li>
+</ul>
+</li>
+<li>Step 4: Move the <strong>fourth-maximal</strong> value to the <strong>fourth-last</strong> position of the list.
+<ul>
+<li>\(2 &gt; 1\) so swap them. \(L = [ 1, 2, 3, 4, 5 ]\)</li>
+<li>The fourth-maximal value \(2\) is moved to the fourth-last of the list</li>
+</ul>
+</li>
+</ul>
+<h3><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list" id="dividing-one-list-into-unsorted-list-and-sorted-list">Dividing one list into unsorted list and sorted list</a></h3>
+<p>In above example, the list is naturally partition into the sorted part
+and the unsorted part.
+The part contains the &quot;bubbled&quot; elements are sorted.
+The others are unsorted.</p>
+<ul>
+<li>Step 1: Move the <strong>maximal</strong> value to the <strong>last</strong> position of the list.
+<ul>
+<li>This iteration ends after the comparison of last two elements(<em>4th</em> and <em>5th</em>)</li>
+<li>The maximal value \(5\) is &quot;bubbled&quot; to the last(<em>5th</em>) of the list</li>
+<li>\(L = [ 3, 2, 4, 1, | 5 ]\)</li>
+<li>The <em>5th</em> element is sorted part and the <em>1st-to-4th</em> is unsorted part</li>
+</ul>
+</li>
+<li>Step 2: Move the <strong>second-maximal</strong> value to the <strong>second-last</strong> position of the list.
+<ul>
+<li>This iteration ends after the comparison of second-last two elements(<em>3rd</em> and <em>4th</em>)</li>
+<li>The second-maximal value \(4\) is &quot;bubbled&quot; to the second-last(<em>4th</em>) of the list</li>
+<li>\(L = [ 3, 2, 1, | 4, 5 ]\)</li>
+<li>The <em>4th-to-5th</em> elements is sorted part and the <em>1st-to-3rd</em> is unsorted part</li>
+</ul>
+</li>
+<li>Step 3: Move the <strong>third-maximal</strong> value to the <strong>third-last</strong> position of the list.
+<ul>
+<li>This iteration ends after the comparison of third-last two elements(<em>2nd</em> and <em>3rd</em>)</li>
+<li>The third-maximal value \(3\) is &quot;bubbled&quot; to the third-last(<em>3rd</em>) of the list</li>
+<li>\(L = [ 2, 1, | 3, 4, 5 ]\)</li>
+<li>The <em>3rd-to-5th</em> elements is sorted part and the <em>1st-to-2nd</em> is unsorted part</li>
+</ul>
+</li>
+<li>Step 4: Move the <strong>fourth-maximal</strong> value to the <strong>fourth-last</strong> position of the list.
+<ul>
+<li>This iteration ends after the comparison of fourth-last two elements(<em>1st</em> and <em>2nd</em>)</li>
+<li>The fourth-maximal value \(2\) is &quot;bubbled&quot; to the fourth-last(<em>2nd</em>) of the list</li>
+<li>\(L = [ 1, | 2, 3, 4, 5 ]\)</li>
+<li>The <em>2nd-to-5th</em> elements is sorted part and the <em>1st</em> is unsorted part</li>
+<li>The last left element is definitely the <strong>smallest</strong> value</li>
+<li>so whole list from <em>1st</em> to <em>5th</em> is sorted</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#algorithm" id="algorithm">Algorithm</a></h2>
+<p>\[ \begin{aligned}
+&amp; BubbleSort(L): \newline
+&amp; \space \space \space \space \text{for } i \leftarrow 1 \text{ to } \vert L \vert - 1: \newline
+&amp; \space \space \space \space \space \space \space \space \text{for } j \leftarrow 1 \text{ to } \vert L \vert - i: \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space \text{if } L[j] &gt; L[j+1]: \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space \space \space \space \space \text{swap } L[j] \text{ and } L[j+1] \newline
+\end{aligned} \]</p>
+<ul>
+<li>At the 1st round, the 1st-last element is sorted</li>
+<li>At the 2nd round, the 2nd-last to 1st-last elements are sorted</li>
+<li>At the 3rd round, the 3rd-last to 1st-last elements are sorted</li>
+<li>At the \(k\) round, the \(k\)-last to 1st-last elements are sorted</li>
+</ul>
+<h3><a class="header" href="#proof" id="proof">Proof</a></h3>
+<h4><a class="header" href="#proof-by-mathematical-induction" id="proof-by-mathematical-induction">Proof by mathematical induction</a></h4>
+<h5><a class="header" href="#lemma-1" id="lemma-1">Lemma 1</a></h5>
+<p>\[
+\begin{aligned}
+&amp; \text{for } j \leftarrow 1 \text{ to } \vert L \vert - 1: \newline
+&amp; \space \space \space \space \text{if } L[j] &gt; L[j+1]: \newline
+&amp; \space \space \space \space \space \space \space \space \text{swap } L[j] \text{ and } L[j+1] \newline
+\end{aligned}
+\]</p>
+<blockquote>
+<p>Given a list \(L\) with \(N\) elements, where \(N = \vert L \vert &gt; 0\),
+the maximal element of \(L\) will be \(L[N]\)(the last element).</p>
+</blockquote>
+<ul>
+<li>Base step: When \(N = 1\), the assumption obviously holds</li>
+<li>Induction Hypothesis: Assume the hypothesis holds when \(N = k(j \leftarrow 1 \text{ to } k-1)\)</li>
+<li>Induction Step: when \(N = k + 1\)
+<ul>
+<li>After the iteration of \(j = k - 1\),
+the list is divided into two parts: \(L[1...k]\) and \(L[k+1]\)</li>
+<li>From above hypothesis, the maximal value in \(L[1...k]\) is \(L[k]\)</li>
+<li>When \(j = k\):
+<ul>
+<li>if \(L[k] \leq L[k+1]\), then the maximal element is \(L[k+1]\),
+so the hypothesis still holds</li>
+<li>if \(L[k] &gt; L[k+1]\), they will be swapped.
+After then, the maximal element will be \(L[k+1]\),
+so the hypothesis still holds</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5><a class="header" href="#lemma-2" id="lemma-2">Lemma 2</a></h5>
+<p>\[
+\begin{aligned}
+&amp; \text{for } i \leftarrow 1 \text{ to } \vert L \vert - 1: \newline
+&amp; \space \space \space \space \text{for } j \leftarrow 1 \text{ to } \vert L \vert - i: \newline
+&amp; \space \space \space \space \space \space \space \space \text{if } L[j] &gt; L[j+1]: \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space \text{swap } L[j] and L[j+1] \newline
+\end{aligned}
+\]</p>
+<blockquote>
+<p>After the \(i\) iteration,
+\(L[N - i + 1]\) will be the \(i\)th largest element of \(L[1...N]\)</p>
+</blockquote>
+<ul>
+<li>Base step: When \(i = 1\), the assumption holds because <em>lemma 1</em> is true</li>
+<li>Induction Hypothesis: Assume hypothesis holds when \(i = k\)</li>
+<li>Induction Step: When \(i = k + 1\)
+<ul>
+<li>The goal is to prove that the \(L[N - k]\) is
+the \((k + 1)\)th largest element of \(L[1...N]\)</li>
+<li>After the iteration \(i = k\), \(L[N-k+1]\) is the \(k\)th
+largest element of \(L[1...N]\)</li>
+<li>We can divide the list into \(L[1...N-k]\) and \(L[N-k+1...N]\)
+<ul>
+<li>The list \(L[N-k+1...N]\) contains the picked
+\(k\)th, \((k-1)\)th, .... , \(1\)st largest elements</li>
+<li>The list \(L[1...N-k]\) is the unselected and unsorted list</li>
+</ul>
+</li>
+<li>By applying the <em>lemma 1</em> to \(L[1...N-k]\),
+the maximal element of \(L[1...N-k]\) will be \(L[N-k]\)
+after all the iterations for \(1 \leq j \leq N - k\).</li>
+<li>\(L[N-k]\) is the \((k+1)\)th selected maximal element</li>
+<li>so \(L[N - (k+1) + 1] = L[N-k]\) is the \((k+1)\)th largest element of \(L[1...N]\)</li>
+</ul>
+</li>
+</ul>
+<h5><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h5>
+<p>By <em>lemma 2</em></p>
+<ul>
+<li>After \(i = 1\), \(L[N]\) is the \(1\)st largest element of \(L[1...N]\)</li>
+<li>After \(i = 2\), \(L[N - 1]\) is the \(2\)nd largest element of \(L[1...N]\)</li>
+<li>After \(i = 3\), \(L[N - 2]\) is the \(3\)rd largest element of \(L[1...N]\)</li>
+<li>...</li>
+<li>After \(i = k\), \(L[N - k + 1]\) is the \(k\)th largest element of \(L[1...N]\)</li>
+<li>After \(i = k+1\), \(L[N - k]\) is the \((k+1)\)th largest element of \(L[1...N]\)</li>
+<li>...</li>
+<li>After \(i = N-2\), \(L[3]\) is the \(N-2\)th largest element of \(L[1...N]\)</li>
+<li>After \(i = N-1\), \(L[2]\) is the \(N-1\)th largest element of \(L[1...N]\)</li>
+<li>After \(i = N\), \(L[1]\) is the \(N\)th largest element of \(L[1...N]\)</li>
+</ul>
+<p>Thus, the list $L[1...N]$ is sorted by the order that \(L[1] \leq L[2] \leq L[3] \leq ... \leq L[N-1] \leq L[N]\).</p>
+<h2><a class="header" href="#complexity" id="complexity">Complexity</a></h2>
+<p>Let \(N = \vert L \vert\) denote the length of list \(L\).</p>
+<table><thead><tr><th>\(i\)</th><th>iterations for \(j\)</th></tr></thead><tbody>
+<tr><td>\(1\)</td><td>\(j \in [1, N-1]\)</td></tr>
+<tr><td>\(2\)</td><td>\(j \in [1, N-2]\)</td></tr>
+<tr><td>...</td><td>...</td></tr>
+<tr><td>\(N-2\)</td><td>\(j \in [1, 2]\)</td></tr>
+<tr><td>\(N-1\)</td><td>\(j = 1\)</td></tr>
+</tbody></table>
+<p>The total of all iterations of <em>BubbleSort(\(L\))</em> is tracked in above table
+and its sum is:</p>
+<p>\[
+\begin{aligned}
+(N - 1) + (N - 2) + ... + 2 + 1
+&amp;= \frac{ N \cdot (N - 1) }{ 2 } \newline
+&amp;= \frac{ 1 }{ 2 } \cdot N^2 - \frac{ 1 }{ 2 } N
+\end{aligned}
+\]</p>
+<p>Thus, the complexity is \(\mathcal{O}(N^2)\).</p>
+<h2><a class="header" href="#implementation" id="implementation">Implementation</a></h2>
+<script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=bubble_sort.cpp"></script>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../sorting/insertion_sort.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../sorting/merge_sort.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../sorting/insertion_sort.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../sorting/merge_sort.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

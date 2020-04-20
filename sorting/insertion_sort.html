@@ -1,0 +1,494 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Insertion sort - Algorithm Proof</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../sorting/sorting.html"><strong aria-hidden="true">1.</strong> Sorting</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sorting/selection_sort.html"><strong aria-hidden="true">1.1.</strong> Selection sort</a></li><li class="chapter-item expanded "><a href="../sorting/insertion_sort.html" class="active"><strong aria-hidden="true">1.2.</strong> Insertion sort</a></li><li class="chapter-item expanded "><a href="../sorting/bubble_sort.html"><strong aria-hidden="true">1.3.</strong> Bubble sort</a></li><li class="chapter-item expanded "><a href="../sorting/merge_sort.html"><strong aria-hidden="true">1.4.</strong> Merge sort</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sorting/naive_inplace_merge.html"><strong aria-hidden="true">1.4.1.</strong> Naive in-place merge</a></li></ol></li><li class="chapter-item expanded "><a href="../sorting/quick_sort.html"><strong aria-hidden="true">1.5.</strong> Quick sort</a></li><li class="chapter-item expanded "><a href="../sorting/heap_sort.html"><strong aria-hidden="true">1.6.</strong> Heap sort</a></li></ol></li><li class="chapter-item expanded "><a href="../graph/graph.html"><strong aria-hidden="true">2.</strong> Graph</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/shortest_path.html"><strong aria-hidden="true">2.1.</strong> Shortest path</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/Floyd_Warshall.html"><strong aria-hidden="true">2.1.1.</strong> Floyd–Warshall</a></li><li class="chapter-item expanded "><a href="../graph/Dijkstra.html"><strong aria-hidden="true">2.1.2.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="../graph/Bellman_Ford_Moore.html"><strong aria-hidden="true">2.1.3.</strong> Bellman-Ford-Moore</a></li><li class="chapter-item expanded "><a href="../graph/Shortest_Path_Faster_Algorithm.html"><strong aria-hidden="true">2.1.4.</strong> Shortest Path Faster Algorithm</a></li></ol></li><li class="chapter-item expanded "><a href="../graph/minimal_spanning_tree.html"><strong aria-hidden="true">2.2.</strong> Minimal spanning tree</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../graph/Kruskal.html"><strong aria-hidden="true">2.2.1.</strong> Kruskal</a></li><li class="chapter-item expanded "><a href="../graph/Prim.html"><strong aria-hidden="true">2.2.2.</strong> Prim</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../search/search.html"><strong aria-hidden="true">3.</strong> Search</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../search/binary_search.html"><strong aria-hidden="true">3.1.</strong> Binary search</a></li><li class="chapter-item expanded "><a href="../search/interpolation_search.html"><strong aria-hidden="true">3.2.</strong> Interpolation search</a></li><li class="chapter-item expanded "><a href="../search/fibonacci_search.html"><strong aria-hidden="true">3.3.</strong> Fibonacci search</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Algorithm Proof</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#insertion-sort" id="insertion-sort">Insertion sort</a></h1>
+<h2><a class="header" href="#idea" id="idea">Idea</a></h2>
+<p>The basic concept is similar to <a href="selection_sort.html" title="Selection Sort"><em>Selection Sort</em></a>.
+Considering there are two lists. One is already sorted,
+and the other is unsorted, denoted \( L_{sorted} \) and \( L_{unsorted} \) respectively.
+The key idea is to pick the element from \( L_{unsorted} \) one by one
+and then <strong>insert</strong> them into the correct positions of \( L_{sorted} \).
+Suppose we have \( L_{sorted} = [3, 8, 34] \)
+and \( L_{unsorted} = [23, 2, 67, 34, 97] \):</p>
+<ul>
+<li>Step 1
+<ul>
+<li>Pick \( 23 \) (which is the first element) from \( L_{unsorted} \),
+and insert it into \( L_{sorted} \)</li>
+<li>Find a position in \( L_{sorted} \) such that
+<strong>all elements before it is less than or equal to \( 23 \)
+and all elements after it is greater than \( 23 \)</strong></li>
+<li>Start comparing it from the <strong>last(maximal)</strong> element
+to the <strong>first(minimal)</strong> one in \( L_{sorted} \)
+(Or you can do same thing from the first element to the last one)</li>
+<li>\( 34 \) is greater than \( 23 \), so we keep moving</li>
+<li>Next, we found that \( 8 \) is less than \( 23 \)</li>
+<li>A-ha! \( 23 \) should be inserted between \( 8 \) and \( 34 \)</li>
+<li>The \( L_{sorted} \) and \( L_{unsorted} \) are updated to \( [3, 8, 23, 34] \)
+and \( [2, 67, 34, 97] \) respectively.</li>
+</ul>
+</li>
+<li>Step 2
+<ul>
+<li>Pick the current first element of \( L_{unsorted} \), \( 2 \),
+and insert it into \( L_{sorted} \)</li>
+<li>Same as the previous step, we start comparing \( 2 \) from the maximal element
+of \( L_{sorted} \) to find the position to insert</li>
+<li>\( 34 \) is obviously larger than \( 2 \), so we should keep moving</li>
+<li>In this step, we can not find any element less than or equal to \( 2 \) after
+the all elements in \( L_{sorted} \) are checked</li>
+<li>Thus, the \( 2 \) is the minimal value among these elements</li>
+<li>We should put \( 2 \) as the first element in \( L_{sorted} \)</li>
+<li>The \( L_{sorted} \) and \( L_{unsorted} \) are updated to \( [2, 3, 8, 23, 34] \)
+and \( [67, 34, 97] \) respectively</li>
+</ul>
+</li>
+<li>Step 3
+<ul>
+<li>pick the current first element of \( L_{unsorted} \), \( 67 \),
+and then insert it into \( L_{sorted} \)</li>
+<li>Start comparing \( 67 \) with \( 34 \), we found \( 67 \) is greater</li>
+<li>It means that \( 67 \) is the maximal value among these elements</li>
+<li>Therefore, \( 67 \) should be inserted at the last position of \( L_{sorted} \)</li>
+<li>The \( L_{sorted} \) and \( L_{unsorted} \) are updated to
+\( [2, 3, 8, 23, 34, 67] \) and \( [34, 97] \) respectively</li>
+</ul>
+</li>
+<li>Step 4
+<ul>
+<li>\( 34 \) is picked to compare with the elements in \( L_{sorted} \).</li>
+<li>\( 67 \) is greater than \( 34 \), so go next</li>
+<li>\( 34 \) is equal to \( 34 \), so we stop here</li>
+<li>The picked \( 34 \) should be inserted between the existed \( 34 \) and \( 67 \)</li>
+<li>so the \( L_{sorted} \) and \( L_{unsorted} \) are updated to
+\( [2, 3, 8, 23, 34, 34, 67] \) and \( [97] \) respectively.</li>
+</ul>
+</li>
+<li>Step 5
+<ul>
+<li>\( 97 \) is picked to insert.</li>
+<li>\( 97 \) is greater than \( 67 \),</li>
+<li>so it should be put to the last position of \( L_{sorted} \)</li>
+<li>Finally, \( L_{unsorted} \) is empty
+and \( L_{sorted} = [2, 3, 8, 23, 34, 34, 67, 97] \).</li>
+</ul>
+</li>
+</ul>
+<h3><a class="header" href="#how-to-find-the-inserted-position" id="how-to-find-the-inserted-position">How to find the inserted position</a></h3>
+<p>We can use the following method to find the <strong>first</strong> element
+whose value is <strong>less than or equal to</strong> the picked element:
+\[
+\begin{aligned}
+&amp; Position(L, x): \newline
+&amp; \space \space \space \space i \leftarrow N \newline
+&amp; \space \space \space \space \text{while } i &gt; 0 \text{ and } L[i] &gt; x: \newline
+&amp; \space \space \space \space \space \space \space \space i \leftarrow i - 1 \newline
+&amp; \space \space \space \space \text{return} \space i
+\end{aligned}
+\]
+,where \( x \) is the element needs to be inserted,
+\( L[i] \) is the \( i \)th element in the sorted list \( L \),
+and \( N = \vert L \vert \) is the length of \( L \).</p>
+<p>After getting the position \( p = Position(L, x) \) given the element \( x \),
+we need to insert \( x \) between \( L[p] \) and \( L[p+1] \).
+(If \( p = 0 \), then we insert \( x \) as the first element \( L[1] \).
+If \( p = N \), then we insert \( x \) as the last element \( L[p + 1] \).)</p>
+<h3><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list" id="dividing-one-list-into-unsorted-list-and-sorted-list">Dividing one list into unsorted list and sorted list</a></h3>
+<p>In implementation, we usually divide the source list \( L \) into two parts.
+One is sorted, the other is unsorted.
+They are denoted \( L_{sorted} \) and \( L_{unsorted} \) respectively.
+This is better for memory usage than
+creating another list to put the sorted results.</p>
+<p>Suppose we have \( L = [73, 24, 37, 9, 97, 29] = L_{sorted} \cup L_{unsorted} \),
+where \( L_{sorted} \) and \( L_{unsorted} \) are initialized to \( [] \)
+and \( [73, 24, 37, 9, 97, 29] \).</p>
+<ul>
+<li>First round
+<ul>
+<li>\( 73 \) is picked, but there is nothing could be compared</li>
+<li>so we just put it into \( L_{sorted} \)</li>
+<li>\( L_{sorted} = [73] \) and \( L_{unsorted} = [24, 37, 9, 97, 29] \)</li>
+<li>now \( L = L_{sorted} \cup L_{unsorted} = [73 \vert 24, 37, 9, 97, 29] \)</li>
+</ul>
+</li>
+<li>Second round
+<ul>
+<li>\( 24 \) is picked and \( p = Position(L_{sorted}, 24) = 0 \)</li>
+<li>so, we should insert \( 24 \) as the <strong>first</strong> element and update lists</li>
+<li>then \( L_{sorted} = [24, 73] \) and \( L_{unsorted} = [37, 9, 97, 29] \)</li>
+<li>now \( L = L_{sorted} \cup L_{unsorted} = [24, 73 \vert 37, 9, 97, 29] \)</li>
+</ul>
+</li>
+<li>Third round
+<ul>
+<li>\( 37 \) is picked and \( p = Position(L_{sorted}, 37) = 1 \)</li>
+<li>so we should insert \( 37 \) between \( L[p] = L[1] = 24 \) and \( L[p + 1] = L[2] = 73 \)</li>
+<li>then \( L_{sorted} = [24, 37, 73] \) and \( L_{unsorted} = [9, 97, 29] \)</li>
+<li>now \( L = L_{sorted} \cup L_{unsorted} = [24, 37, 73 \vert 9, 97, 29] \)</li>
+</ul>
+</li>
+<li>Fourth round
+<ul>
+<li>\( 9 \) is picked and \( p = Position(L_{sorted}, 9) = 0 \)</li>
+<li>Thus, \( L_{sorted}, L_{unsorted} \) are updated to
+\( [9, 24, 37, 73] \) and \( [97, 29] \).</li>
+<li>now \( L = L_{sorted} \cup L_{unsorted} = [9, 24, 37, 73 \vert 97, 29] \)</li>
+</ul>
+</li>
+<li>Fifth round
+<ul>
+<li>\( 97 \) is picked and \( p = Position(L_{sorted}, 97) = 4 = \vert L_{sorted} \vert \)</li>
+<li>so we should put \( 97 \) as the <strong>last</strong> element of the \( L_{sorted} \)</li>
+<li>then \( L_{sorted} = [9, 24, 37, 73, 97] \) and \( L_{unsorted} = [29] \)</li>
+<li>now \( L = L_{sorted} \cup L_{unsorted} = [9, 24, 37, 73, 97 \vert 29] \).</li>
+</ul>
+</li>
+<li>Final round
+<ul>
+<li>\( 29 \) is picked and \( p = Position(L_{sorted}, 29) = 2 \)</li>
+<li>so we should insert \( 29 \) between \( L[p] = L[2] = 24 \) and \( L[p + 1] = L[3] = 37 \)</li>
+<li>then \( L_{sorted} = [9, 24, 29, 37, 73, 97] \) and \( L_{unsorted} = [] \) is empty</li>
+<li>now \( L = L_{sorted} \cup L_{unsorted} = [9, 24, 29, 37, 73, 97] \).</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#algorithm" id="algorithm">Algorithm</a></h2>
+<p>\[
+\begin{aligned}
+&amp; InsertionSort(L): \newline
+&amp; \space \space \space \space \text{for } i \leftarrow 2 \text{ to } \vert L \vert: \newline
+&amp; \space \space \space \space \space \space \space \space j \leftarrow i \newline
+&amp; \space \space \space \space \space \space \space \space \text{while } j &gt; 1 \text{ and } L[j-1] &gt; L[j]: \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space \text{swap } L[j-1] \text{ and } L[j] \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space j \leftarrow j - 1
+\end{aligned}
+\]</p>
+<p>The above method will divide \( L \) into two parts.
+\( L[1...i-1] = L_{sorted} \) is sorted, and \( L[i...N] = L_{unsorted} \) is unsorted,
+where \( N = \vert L \vert \) is the length of \( L \).
+The \( L[i] \) will be picked to insert into \( L_{sorted} \) iteratively.</p>
+<ul>
+<li>When \( i = 2 \)
+<ul>
+<li>\( L_{sorted} = L[1] \) and \( L_{unsorted} = L[2...N] \)</li>
+<li>The goal in this round is to insert the \( L[2] \) into \( L_{sorted} \)</li>
+<li>The \( L[2] \) is picked and compare with \( L[1] \)</li>
+<li>If \( L[2] &lt; L[1] \), then we swap them</li>
+<li>Otherwise, do nothing</li>
+<li>Then, \( L_{sorted} = L[1...2] \) is sorted and \( L_{unsorted} = L[3...N] \)</li>
+</ul>
+</li>
+<li>When \( i = 3 \)
+<ul>
+<li>\( L_{sorted} = L[1...2] \) and \( L_{unsorted} = L[3...N] \)</li>
+<li>The goal in this round is to insert the \( L[3] \) into \( L_{sorted} \)</li>
+<li>The \( L[3] \) is picked</li>
+<li>If \( L[3] &gt;= L[2] \), it means that \( L[1...3] \) is sorted, so we don't need to do anything</li>
+<li>Otherwise(\( L[3] &lt; L[2] \)), swap \( L[3] \) and \( L[2] \)
+and check whether it needs to swap again if \( L[2] &lt; L[1] \)</li>
+<li>After finishing checking, \( L_{sorted} = L[1...3] \) is sorted
+and \( L_{unsorted} = L[4...N] \)</li>
+</ul>
+</li>
+<li>When \( i = k \)
+<ul>
+<li>\( L_{sorted} = L[1...k-1] \) and \( L_{unsorted} = L[k...N] \)</li>
+<li>The goal in this round is to insert the \( L[k] \) into \( L_{sorted} \)</li>
+<li>The \( L[k] \) is picked to compare with the elements one by one in \( L_{sorted} \),
+from the maximal(\( L[k-1] \)) to minimal item(\( L[1] \)), to find a place to insert</li>
+<li>After finishing checking, \( L_{sorted} = L[1...k] \) is sorted
+and \( L_{unsorted} \) is \( L[k+1...N] \)</li>
+</ul>
+</li>
+<li>When \( i = N \)
+<ul>
+<li>\( L_{sorted} = L[1...N-1] \) and \( L_{unsorted} = L[N] \)</li>
+<li>The goal in this round is to insert the \( L[N] \) into \( L_{sorted} \)</li>
+<li>In the same way, the \( L[1...N] \) is sorted after finishing the procedure</li>
+<li>so \( L_{sorted} \) is updated to \( L[1...N] \) and \( L_{unsorted} = [] \) is empty</li>
+</ul>
+</li>
+</ul>
+<h3><a class="header" href="#another-method-without-swapping" id="another-method-without-swapping">Another method without swapping</a></h3>
+<p>\[
+\begin{aligned}
+&amp; InsertionSort(L): \newline
+&amp; \space \space \space \space \text{for } i \leftarrow 2 \text{ to } \vert L \vert: \newline
+&amp; \space \space \space \space \space \space \space \space c \leftarrow L[i] \newline
+&amp; \space \space \space \space \space \space \space \space j \leftarrow i \newline
+&amp; \space \space \space \space \space \space \space \space \text{while } j &gt; 1 \text{ and } L[j-1] &gt; c: \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space L[j] = L[j-1] \newline
+&amp; \space \space \space \space \space \space \space \space \space \space \space \space j = j - 1 \newline
+&amp; \space \space \space \space \space \space \space \space L[j] = c
+\end{aligned}
+\]</p>
+<h3><a class="header" href="#proof" id="proof">Proof</a></h3>
+<h4><a class="header" href="#proof-by-mathematical-induction" id="proof-by-mathematical-induction">Proof by mathematical induction</a></h4>
+<blockquote>
+<p>After each iteration for \( i \) in \( InsertionSort \),
+the \( L[1...i] \) is sorted array.</p>
+</blockquote>
+<p>We need to prove this statement is true.</p>
+<ul>
+<li>when \( i = 2 \):
+<ul>
+<li>Same as the above explanation</li>
+<li>The assumption is hold</li>
+</ul>
+</li>
+<li>when \( i = k \):
+<ul>
+<li>Assume the statement is hold when \( i = k \)</li>
+<li>\( L[1...k] \) is sorted array</li>
+</ul>
+</li>
+<li>when \( i = k + 1 \)
+<ul>
+<li>If \( L[k + 1] &gt; L[k] \), then \( L[1...k + 1] \) is naturally sorted
+so the proof is done</li>
+<li>Otherwise, the \( L[k + 1] \) is swapped with \( L[k] \)</li>
+<li>Now \( L[1...k-1] \) is sorted and \( L[k + 1] &gt; L[k] \)(after swapping!)</li>
+<li>Next, we apply this algorithm to \( L = L[1...k-1] \cup L[k] \) and now \( i = k \)</li>
+<li>The statement is hold when \( i = k \),
+so \( L[1...k] \) is sorted after applying the algorithm</li>
+<li>Now \( L[1...k] \) is sorted and \( L[k + 1] &gt; L[k] \), so the proof is done</li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#complexity" id="complexity">Complexity</a></h2>
+<p>The time complexity depends on the speed to find the inserted position.
+The more iterations to find the value of \( Position(L, x) \) need,
+the more time it takes.
+The worst case is that we need to go through whole \( L_{sorted} \) to find correct
+positions to insert. It happens when the list is arranged from maximal to
+minimal values(e.g.,\( [5, 4, 3, 2, 1] \)).
+In this case, if the length of list is \( N \), we need to search
+\[
+\begin{aligned}
+0 + 1 + 2 + ... + (N - 1)
+&amp;= \frac{ N \cdot (N - 1) }{ 2 } \newline
+&amp;= \frac{ 1 }{ 2 } \cdot N^2 - \frac{ 1 }{ 2 } N
+\end{aligned}
+\]
+times to move all the items into \( L_{sorted} \).
+Thus, the complexity is \( \mathcal{O}(N^2) \).</p>
+<h2><a class="header" href="#implementation" id="implementation">Implementation</a></h2>
+<script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=insertion_sort.cpp"></script>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../sorting/selection_sort.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../sorting/bubble_sort.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../sorting/selection_sort.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../sorting/bubble_sort.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
