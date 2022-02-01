@@ -4,44 +4,36 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Algorithm Proof</title>
-        
         <meta name="robots" content="noindex" />
-        
-
+        <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
         <link rel="stylesheet" href="css/print.css" media="print">
-
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="fonts/fonts.css">
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
-
-        
         <!-- MathJax -->
         <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -94,7 +86,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -111,11 +102,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Algorithm Proof</h1>
@@ -124,14 +113,12 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -139,8 +126,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -152,7 +137,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#sorting" id="sorting">Sorting</a></h1>
+                        <h1 id="sorting"><a class="header" href="#sorting">Sorting</a></h1>
 <p>To arrange items from minimal to maximal values(or maximal to minimal),
 given a disorder list \( L \).</p>
 <p>For examples, given \( L = [ 5, 3, 1, 2, 4, 3, 8 ] \)
@@ -168,8 +153,8 @@ or
 \[
 L_{sorted} = [ 8, 5, 4, 3, 3, 2, 1 ]
 \]</p>
-<h1><a class="header" href="#selection-sort" id="selection-sort">Selection sort</a></h1>
-<h2><a class="header" href="#idea" id="idea">Idea</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="selection-sort"><a class="header" href="#selection-sort">Selection sort</a></h1>
+<h2 id="idea"><a class="header" href="#idea">Idea</a></h2>
 <p>The concept is quite straight.
 If we could get the minimal value from list <strong>one by one</strong>,
 then we could re-arrange the list from minimal to maximal values.</p>
@@ -215,7 +200,7 @@ so we move it into \(L_{sorted}\). Now,
 In the same way, to sort the list from maximal to minimal values,
 the only different is to pick the maximal value from list each round
 instead of minimal value.</p>
-<h3><a class="header" href="#how-to-get-minimalor-maximal-value" id="how-to-get-minimalor-maximal-value">How to get minimal(or maximal) value</a></h3>
+<h3 id="how-to-get-minimalor-maximal-value"><a class="header" href="#how-to-get-minimalor-maximal-value">How to get minimal(or maximal) value</a></h3>
 <p>The way to get minimal(or maximal) items in \(L\)
 is to linearly search the whole list:
 \[
@@ -239,7 +224,7 @@ or
 \]
 , where \(L[i]\) is the \(i\)th element in the list \(L\)
 and \(N\) is the length of \(L\).</p>
-<h3><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list" id="dividing-one-list-into-unsorted-list-and-sorted-list">Dividing one list into unsorted list and sorted list</a></h3>
+<h3 id="dividing-one-list-into-unsorted-list-and-sorted-list"><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list">Dividing one list into unsorted list and sorted list</a></h3>
 <p>In implementation, we usually divide the source list,
 which needs to be sorted, into two parts. One is sorted, the other is unsorted.
 This is better for memory usage than
@@ -277,7 +262,7 @@ from \(L_{unsorted}\) to \(L_{sorted}\), so
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#algorithm" id="algorithm">Algorithm</a></h2>
+<h2 id="algorithm"><a class="header" href="#algorithm">Algorithm</a></h2>
 <p>\[
 \begin{aligned}
 &amp; SelectionSort(L): \newline
@@ -346,8 +331,8 @@ in \(L[1...N]\), so we don't need to do anything</li>
 </ul>
 </li>
 </ul>
-<h3><a class="header" href="#proof" id="proof">Proof</a></h3>
-<h4><a class="header" href="#proof-by-contradiction" id="proof-by-contradiction">Proof by contradiction</a></h4>
+<h3 id="proof"><a class="header" href="#proof">Proof</a></h3>
+<h4 id="proof-by-contradiction"><a class="header" href="#proof-by-contradiction">Proof by contradiction</a></h4>
 <ul>
 <li>Assume this method can <strong>not</strong> give us an ordered list</li>
 <li>so it exists one \(L[p] &gt; L[q]\), where \(p &lt; q\), in the result list \(L\)</li>
@@ -358,7 +343,7 @@ because \(p &lt; q\) in the result list \(L\)</li>
 <li>It means \(L[p] &lt; L[q]\) and it is contradictory to the assumption</li>
 <li>Thus, the assumption is wrong. This method will give us an ordered list.</li>
 </ul>
-<h2><a class="header" href="#complexity" id="complexity">Complexity</a></h2>
+<h2 id="complexity"><a class="header" href="#complexity">Complexity</a></h2>
 <p>We need to search whole \(L_{unsorted}\) to find a minimal(or maximal) item.
 Suppose \(\vert L_{unsorted} \vert = N\) at first.
 (the length of \(L_{unsorted}\) is \(N\)).</p>
@@ -382,10 +367,10 @@ N + (N - 1) + (N - 2) + .... + 1
 times to move all the items into \(L_{sorted}\).
 Thus, the complexity is \(\mathcal{O}(N^2)\),
 where the \(N\) is the length of the list \(L\).</p>
-<h2><a class="header" href="#implementation" id="implementation">Implementation</a></h2>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=selection_sort.cpp"></script>
-<h1><a class="header" href="#insertion-sort" id="insertion-sort">Insertion sort</a></h1>
-<h2><a class="header" href="#idea-1" id="idea-1">Idea</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="insertion-sort"><a class="header" href="#insertion-sort">Insertion sort</a></h1>
+<h2 id="idea-1"><a class="header" href="#idea-1">Idea</a></h2>
 <p>The basic concept is similar to <a href="sorting/selection_sort.html" title="Selection Sort"><em>Selection Sort</em></a>.
 Considering there are two lists. One is already sorted,
 and the other is unsorted, denoted \( L_{sorted} \) and \( L_{unsorted} \) respectively.
@@ -457,7 +442,7 @@ and \( L_{sorted} = [2, 3, 8, 23, 34, 34, 67, 97] \).</li>
 </ul>
 </li>
 </ul>
-<h3><a class="header" href="#how-to-find-the-inserted-position" id="how-to-find-the-inserted-position">How to find the inserted position</a></h3>
+<h3 id="how-to-find-the-inserted-position"><a class="header" href="#how-to-find-the-inserted-position">How to find the inserted position</a></h3>
 <p>We can use the following method to find the <strong>first</strong> element
 whose value is <strong>less than or equal to</strong> the picked element:
 \[
@@ -476,7 +461,7 @@ and \( N = \vert L \vert \) is the length of \( L \).</p>
 we need to insert \( x \) between \( L[p] \) and \( L[p+1] \).
 (If \( p = 0 \), then we insert \( x \) as the first element \( L[1] \).
 If \( p = N \), then we insert \( x \) as the last element \( L[p + 1] \).)</p>
-<h3><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list-1" id="dividing-one-list-into-unsorted-list-and-sorted-list-1">Dividing one list into unsorted list and sorted list</a></h3>
+<h3 id="dividing-one-list-into-unsorted-list-and-sorted-list-1"><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list-1">Dividing one list into unsorted list and sorted list</a></h3>
 <p>In implementation, we usually divide the source list \( L \) into two parts.
 One is sorted, the other is unsorted.
 They are denoted \( L_{sorted} \) and \( L_{unsorted} \) respectively.
@@ -535,7 +520,7 @@ and \( [73, 24, 37, 9, 97, 29] \).</p>
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#algorithm-1" id="algorithm-1">Algorithm</a></h2>
+<h2 id="algorithm-1"><a class="header" href="#algorithm-1">Algorithm</a></h2>
 <p>\[
 \begin{aligned}
 &amp; InsertionSort(L): \newline
@@ -592,7 +577,7 @@ and \( L_{unsorted} \) is \( L[k+1...N] \)</li>
 </ul>
 </li>
 </ul>
-<h3><a class="header" href="#another-method-without-swapping" id="another-method-without-swapping">Another method without swapping</a></h3>
+<h3 id="another-method-without-swapping"><a class="header" href="#another-method-without-swapping">Another method without swapping</a></h3>
 <p>\[
 \begin{aligned}
 &amp; InsertionSort(L): \newline
@@ -605,8 +590,8 @@ and \( L_{unsorted} \) is \( L[k+1...N] \)</li>
 &amp; \space \space \space \space \space \space \space \space L[j] = c
 \end{aligned}
 \]</p>
-<h3><a class="header" href="#proof-1" id="proof-1">Proof</a></h3>
-<h4><a class="header" href="#proof-by-mathematical-induction" id="proof-by-mathematical-induction">Proof by mathematical induction</a></h4>
+<h3 id="proof-1"><a class="header" href="#proof-1">Proof</a></h3>
+<h4 id="proof-by-mathematical-induction"><a class="header" href="#proof-by-mathematical-induction">Proof by mathematical induction</a></h4>
 <blockquote>
 <p>After each iteration for \( i \) in \( InsertionSort \),
 the \( L[1...i] \) is sorted array.</p>
@@ -638,7 +623,7 @@ so \( L[1...k] \) is sorted after applying the algorithm</li>
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#complexity-1" id="complexity-1">Complexity</a></h2>
+<h2 id="complexity-1"><a class="header" href="#complexity-1">Complexity</a></h2>
 <p>The time complexity depends on the speed to find the inserted position.
 The more iterations to find the value of \( Position(L, x) \) need,
 the more time it takes.
@@ -655,10 +640,10 @@ In this case, if the length of list is \( N \), we need to search
 \]
 times to move all the items into \( L_{sorted} \).
 Thus, the complexity is \( \mathcal{O}(N^2) \).</p>
-<h2><a class="header" href="#implementation-1" id="implementation-1">Implementation</a></h2>
+<h2 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=insertion_sort.cpp"></script>
-<h1><a class="header" href="#bubble-sort" id="bubble-sort">Bubble sort</a></h1>
-<h2><a class="header" href="#idea-2" id="idea-2">Idea</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bubble-sort"><a class="header" href="#bubble-sort">Bubble sort</a></h1>
+<h2 id="idea-2"><a class="header" href="#idea-2">Idea</a></h2>
 <p>The basic concept is same to <a href="sorting/selection_sort.html" title="Selection Sort"><em>Selection Sort</em></a>.
 The list is rearranged from minimal to maximal value
 by picking the maximal(or minimal) value from the unsorted list iteratively.</p>
@@ -701,7 +686,7 @@ Therefore, the maximal, the second-maximal, ... values will be
 </ul>
 </li>
 </ul>
-<h3><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list-2" id="dividing-one-list-into-unsorted-list-and-sorted-list-2">Dividing one list into unsorted list and sorted list</a></h3>
+<h3 id="dividing-one-list-into-unsorted-list-and-sorted-list-2"><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list-2">Dividing one list into unsorted list and sorted list</a></h3>
 <p>In above example, the list is naturally partition into the sorted part
 and the unsorted part.
 The part contains the &quot;bubbled&quot; elements are sorted.
@@ -742,7 +727,7 @@ The others are unsorted.</p>
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#algorithm-2" id="algorithm-2">Algorithm</a></h2>
+<h2 id="algorithm-2"><a class="header" href="#algorithm-2">Algorithm</a></h2>
 <p>\[ \begin{aligned}
 &amp; BubbleSort(L): \newline
 &amp; \space \space \space \space \text{for } i \leftarrow 1 \text{ to } \vert L \vert - 1: \newline
@@ -756,9 +741,9 @@ The others are unsorted.</p>
 <li>At the 3rd round, the 3rd-last to 1st-last elements are sorted</li>
 <li>At the \(k\) round, the \(k\)-last to 1st-last elements are sorted</li>
 </ul>
-<h3><a class="header" href="#proof-2" id="proof-2">Proof</a></h3>
-<h4><a class="header" href="#proof-by-mathematical-induction-1" id="proof-by-mathematical-induction-1">Proof by mathematical induction</a></h4>
-<h5><a class="header" href="#lemma-1" id="lemma-1">Lemma 1</a></h5>
+<h3 id="proof-2"><a class="header" href="#proof-2">Proof</a></h3>
+<h4 id="proof-by-mathematical-induction-1"><a class="header" href="#proof-by-mathematical-induction-1">Proof by mathematical induction</a></h4>
+<h5 id="lemma-1"><a class="header" href="#lemma-1">Lemma 1</a></h5>
 <p>\[
 \begin{aligned}
 &amp; \text{for } j \leftarrow 1 \text{ to } \vert L \vert - 1: \newline
@@ -790,7 +775,7 @@ so the hypothesis still holds</li>
 </ul>
 </li>
 </ul>
-<h5><a class="header" href="#lemma-2" id="lemma-2">Lemma 2</a></h5>
+<h5 id="lemma-2"><a class="header" href="#lemma-2">Lemma 2</a></h5>
 <p>\[
 \begin{aligned}
 &amp; \text{for } i \leftarrow 1 \text{ to } \vert L \vert - 1: \newline
@@ -827,7 +812,7 @@ after all the iterations for \(1 \leq j \leq N - k\).</li>
 </ul>
 </li>
 </ul>
-<h5><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h5>
+<h5 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h5>
 <p>By <em>lemma 2</em></p>
 <ul>
 <li>After \(i = 1\), \(L[N]\) is the \(1\)st largest element of \(L[1...N]\)</li>
@@ -842,7 +827,7 @@ after all the iterations for \(1 \leq j \leq N - k\).</li>
 <li>After \(i = N\), \(L[1]\) is the \(N\)th largest element of \(L[1...N]\)</li>
 </ul>
 <p>Thus, the list $L[1...N]$ is sorted by the order that \(L[1] \leq L[2] \leq L[3] \leq ... \leq L[N-1] \leq L[N]\).</p>
-<h2><a class="header" href="#complexity-2" id="complexity-2">Complexity</a></h2>
+<h2 id="complexity-2"><a class="header" href="#complexity-2">Complexity</a></h2>
 <p>Let \(N = \vert L \vert\) denote the length of list \(L\).</p>
 <table><thead><tr><th>\(i\)</th><th>iterations for \(j\)</th></tr></thead><tbody>
 <tr><td>\(1\)</td><td>\(j \in [1, N-1]\)</td></tr>
@@ -861,10 +846,10 @@ and its sum is:</p>
 \end{aligned}
 \]</p>
 <p>Thus, the complexity is \(\mathcal{O}(N^2)\).</p>
-<h2><a class="header" href="#implementation-2" id="implementation-2">Implementation</a></h2>
+<h2 id="implementation-2"><a class="header" href="#implementation-2">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=bubble_sort.cpp"></script>
-<h1><a class="header" href="#merge-sort" id="merge-sort">Merge sort</a></h1>
-<h2><a class="header" href="#idea-3" id="idea-3">Idea</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="merge-sort"><a class="header" href="#merge-sort">Merge sort</a></h1>
+<h2 id="idea-3"><a class="header" href="#idea-3">Idea</a></h2>
 <p><em>Merge sort</em> is an efficient algorithm that
 applies the concepts of <a href="https://en.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm"><em>divide and conquer</em></a> to sort the list.</p>
 <p>The key idea of <a href="https://en.wikipedia.org/wiki/Divide_and_conquer_algorithm" title="Divide and conquer algorithm"><em>divide and conquer</em></a> is to recursively break down the problems
@@ -872,7 +857,7 @@ into two or more sub-problems and they are same or related to the original probl
 until these divided sub-problems are simple enough to solve directly.
 Then, the solutions of the original problem can be combined and derived
 by the solutions of all the sub-problems.</p>
-<h3><a class="header" href="#divide-and-conquer" id="divide-and-conquer">Divide and conquer</a></h3>
+<h3 id="divide-and-conquer"><a class="header" href="#divide-and-conquer">Divide and conquer</a></h3>
 <p>The calculation of <a href="https://en.wikipedia.org/wiki/Fibonacci_number" title="Fibonacci number"><em>Fibonacci number</em></a>, \( F(n) = F(n-1) + F(n-2) \),
 is one example.
 To calculate \( F(n) \), it needs to find \( F(n-1) \) and \( F(n-2) \).
@@ -883,7 +868,7 @@ as the one for \( F(n) \).</p>
 and \( F(1) \) and \( F(2) \) are easy enough to solve directly. They are both \( 1 \).
 Thus, \( F(3) = F(2) + F(1) = 2 \), \( F(4) = F(3) + F(2) = 3 \), ... and then \( F(n) \)
 can be computed.</p>
-<h3><a class="header" href="#dividing-the-sorting-problem" id="dividing-the-sorting-problem">Dividing the sorting-problem</a></h3>
+<h3 id="dividing-the-sorting-problem"><a class="header" href="#dividing-the-sorting-problem">Dividing the sorting-problem</a></h3>
 <p>Let's apply this concept to the sorting problem.
 If we want to sort the list \( L = [6, 3, 7, 1, 9, 2, 5] \),
 the sub-lists \( [6, 3, 7, 1], [9, 2, 5] \) must also be sorted,
@@ -903,7 +888,7 @@ so we stop breaking down the list.</p>
 </pre>
 <p>In the same way, the whole list can be divided into
 \( [6], [3], [7], [1], [9], [2], [5] \).</p>
-<h3><a class="header" href="#conquering-the-sub-problems" id="conquering-the-sub-problems">Conquering the sub-problems</a></h3>
+<h3 id="conquering-the-sub-problems"><a class="header" href="#conquering-the-sub-problems">Conquering the sub-problems</a></h3>
 <p>After there is only one element left,
 the subproblem is solved by nature since it's already sorted.</p>
 <p>However, the problem becomes</p>
@@ -913,10 +898,10 @@ the subproblem is solved by nature since it's already sorted.</p>
 <p>We need a method that can merge two sorted lists,
 \( L_1[1...X] \) and \( L_2[1...Y] \), where \( X, Y \geq 1 \),
 into a bigger sorted list \( L[1...(X+Y)] \).</p>
-<h3><a class="header" href="#combining-all-the-results-of-sub-sorting-problem" id="combining-all-the-results-of-sub-sorting-problem">Combining all the results of sub-sorting-problem</a></h3>
+<h3 id="combining-all-the-results-of-sub-sorting-problem"><a class="header" href="#combining-all-the-results-of-sub-sorting-problem">Combining all the results of sub-sorting-problem</a></h3>
 <p>Suppose we have two sorted lists \( A = [3, 6, 10, 23] \) and \( B = [2, 7, 50, 55] \).
 We provide two ways to merge them into a sorted list.</p>
-<h4><a class="header" href="#picking-the-smallest-elements-one-by-one" id="picking-the-smallest-elements-one-by-one">Picking the smallest elements one by one</a></h4>
+<h4 id="picking-the-smallest-elements-one-by-one"><a class="header" href="#picking-the-smallest-elements-one-by-one">Picking the smallest elements one by one</a></h4>
 <p>The simplest method is to pick the smallest elements iteratively
 by searching both lists from the minimal to maximal.</p>
 <p>We only need to compare the left most elements of both lists
@@ -983,7 +968,7 @@ L = [2, 3, 6, 7, 10, 23, 50, 55]
 <p>Next, we can append all the rest elements
 from \( 50 \) to the end of \( B \) into the \( L \).
 Finally, we get a sort list \( L \).</p>
-<h4><a class="header" href="#swapping-the-elements-one-by-one" id="swapping-the-elements-one-by-one">Swapping the elements one by one</a></h4>
+<h4 id="swapping-the-elements-one-by-one"><a class="header" href="#swapping-the-elements-one-by-one">Swapping the elements one by one</a></h4>
 <p>Another idea to merge the two sorted lists
 \( A = [3, 6, 10, 23] \) and \( B = [2, 7, 50, 55] \),
 is to couple them together into a list \( L = A \cup B \)</p>
@@ -1053,7 +1038,7 @@ It doesn't need to be moved since \( 50 &lt; 55 \),
 so just append it to the \( A \).
 Finally, \( A = [2, 3, 6, 7, 10, 23, 50, 55] \) and \( B = [] \) is empty now.
 Now we have a sorted list \( L = A \cup B = A \)!</p>
-<h4><a class="header" href="#which-merge-method-is-better" id="which-merge-method-is-better">Which merge method is better</a></h4>
+<h4 id="which-merge-method-is-better"><a class="header" href="#which-merge-method-is-better">Which merge method is better</a></h4>
 <p>The first method use <strong>extra space</strong> to store the sorted results,
 rather than the second in-place solution.
 On the other hand, the second method needs <strong>more swapping executions</strong>
@@ -1065,7 +1050,7 @@ However, it's complicated.
 I will write another post for illustrating it.
 Please refer <em>In-place merge sort</em> in <a href="https://github.com/liuxinyu95/AlgoXY/releases/download/v0.618033/elementary-algorithms.pdf" title="Elementary Algorithms">Elementary Algorithms</a>
 to read it.</p>
-<h2><a class="header" href="#algorithm-3" id="algorithm-3">Algorithm</a></h2>
+<h2 id="algorithm-3"><a class="header" href="#algorithm-3">Algorithm</a></h2>
 <p>\[
 \begin{aligned}
 &amp; MergeSort(L): \newline
@@ -1107,8 +1092,8 @@ to read it.</p>
 &amp; \space \space \space \space \space \space \space \space L[i] \leftarrow L^\prime[i]
 \end{aligned}
 \]</p>
-<h3><a class="header" href="#proof-3" id="proof-3">Proof</a></h3>
-<h4><a class="header" href="#correctness-of-merge" id="correctness-of-merge">Correctness of <em>Merge</em></a></h4>
+<h3 id="proof-3"><a class="header" href="#proof-3">Proof</a></h3>
+<h4 id="correctness-of-merge"><a class="header" href="#correctness-of-merge">Correctness of <em>Merge</em></a></h4>
 <pre>
   List L
 
@@ -1190,7 +1175,7 @@ the current selected minimal element or <em>1</em> is false</li>
 </ul>
 </li>
 </ul>
-<h4><a class="header" href="#correctness-of-merge-sort" id="correctness-of-merge-sort">Correctness of <em>Merge Sort</em></a></h4>
+<h4 id="correctness-of-merge-sort"><a class="header" href="#correctness-of-merge-sort">Correctness of <em>Merge Sort</em></a></h4>
 <blockquote>
 <p>Given a list \( L \) with \( N \) elements,
 the \( L \) can be sorted
@@ -1220,7 +1205,7 @@ so the proof is done</li>
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#complexity-3" id="complexity-3">Complexity</a></h2>
+<h2 id="complexity-3"><a class="header" href="#complexity-3">Complexity</a></h2>
 <pre>
   ^    +------------------------------------------------------+   Merge
   |    |                           N                          |   Complexity
@@ -1273,7 +1258,7 @@ T_{merge}(N) = c \cdot N
 \]</p>
 <p>where \( c \) is a constant reflecting the basic operations
 like comparisons or assignments for merging routine.</p>
-<h3><a class="header" href="#by-the-recursion-tree" id="by-the-recursion-tree">By the recursion tree</a></h3>
+<h3 id="by-the-recursion-tree"><a class="header" href="#by-the-recursion-tree">By the recursion tree</a></h3>
 <p>From the above figure, the total time for the <em>merge sort</em> is</p>
 <p>\[
 \begin{aligned}
@@ -1290,7 +1275,7 @@ As a result,</p>
 Time = c \cdot N \cdot \log_{ 2 }N
 \]</p>
 <p>Thus, the time complexity is \( \mathcal{O}(N \log N) \).</p>
-<h3><a class="header" href="#by-telescoping" id="by-telescoping">By telescoping</a></h3>
+<h3 id="by-telescoping"><a class="header" href="#by-telescoping">By telescoping</a></h3>
 <p>Formally, since the <em>merge sort</em> repeatedly breaks down the \( N \)-elements list
 into two \( \frac{N}{2} \)-elements sublists,
 the amount of time that <em>merge sort</em>, \( T_{sort}(N) \),
@@ -1319,14 +1304,14 @@ T_{sort}(N)
 \end{aligned}
 \]</p>
 <p>Thus, the time complexity is \( \mathcal{O}(N \log N) \).</p>
-<h2><a class="header" href="#implementation-3" id="implementation-3">Implementation</a></h2>
+<h2 id="implementation-3"><a class="header" href="#implementation-3">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=merge_sort.cpp"></script>
-<h2><a class="header" href="#appendix" id="appendix">Appendix</a></h2>
+<h2 id="appendix"><a class="header" href="#appendix">Appendix</a></h2>
 <ul>
 <li><a href="sorting/naive_inplace_merge.html">Naive in-pace merge</a></li>
 </ul>
 <!-- - [In-pace merge sort with working area][wimsort] -->
-<h2><a class="header" href="#reference" id="reference">Reference</a></h2>
+<h2 id="reference"><a class="header" href="#reference">Reference</a></h2>
 <ul>
 <li><a href="http://www-bcf.usc.edu/%7Edkempe/CS104/11-07.pdf" title="2013 CS104: Recursive Sorting Algorithms and their Analysis">CS104</a></li>
 <li><a href="http://www.cs.princeton.edu/courses/archive/spr07/cos226/lectures/04MergeQuick.pdf" title="Mergesort and Quicksort">COS226</a></li>
@@ -1334,8 +1319,8 @@ T_{sort}(N)
 <li><a href="http://www.inf.unibz.it/%7Enutt/DSA1112/DSALabs/sols2.pdf" title="Data Structures and Algorithms">DSA1112</a></li>
 <li><a href="https://www.cs.rochester.edu/%7Egildea/csc282/slides/C02-start.pdf" title="Getting Started">CSC282</a></li>
 </ul>
-<h1><a class="header" href="#naive-in-place-merge" id="naive-in-place-merge">Naive in-place merge</a></h1>
-<h2><a class="header" href="#correctness" id="correctness">Correctness</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="naive-in-place-merge"><a class="header" href="#naive-in-place-merge">Naive in-place merge</a></h1>
+<h2 id="correctness"><a class="header" href="#correctness">Correctness</a></h2>
 <p>\[
 \begin{aligned}
 &amp; naiveInplaceMerge(L, l, m, r): \newline
@@ -1346,7 +1331,7 @@ T_{sort}(N)
 &amp; \space \space \space \space \space \space \space \space \space \space \space \space \text{swap } L[j-1] \text{ and } L[j]
 \end{aligned}
 \]</p>
-<h3><a class="header" href="#lemma-1-1" id="lemma-1-1">Lemma 1</a></h3>
+<h3 id="lemma-1-1"><a class="header" href="#lemma-1-1">Lemma 1</a></h3>
 <blockquote>
 <p>Given a sorted list \( A = [a_1, a_2, ..., a_N] \) with \( N \) elements,
 where \( a_1 \leq a_2 \leq ... \leq a_N \),
@@ -1372,7 +1357,7 @@ and all its elements are smaller than the current \( (k+1) \)th element \( L[k] 
 </ul>
 </li>
 </ul>
-<h3><a class="header" href="#lemma-2-1" id="lemma-2-1">Lemma 2</a></h3>
+<h3 id="lemma-2-1"><a class="header" href="#lemma-2-1">Lemma 2</a></h3>
 <blockquote>
 <p>Given a sorted list \( A = [a_1, a_2, ..., a_N] \) with \( N \) elements
 where \( a_1 \leq a_2 \leq ... \leq a_N \),
@@ -1403,19 +1388,19 @@ and \( B^\prime = L[N+2...N+k+1] \) with \( k \) elements</li>
 </ul>
 </li>
 </ul>
-<h3><a class="header" href="#complexity-4" id="complexity-4">Complexity</a></h3>
+<h3 id="complexity-4"><a class="header" href="#complexity-4">Complexity</a></h3>
 <p>\( \mathcal{O}(N^2) \)</p>
-<h1><a class="header" href="#quick-sort" id="quick-sort">Quick sort</a></h1>
-<h2><a class="header" href="#implementation-4" id="implementation-4">Implementation</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-sort"><a class="header" href="#quick-sort">Quick sort</a></h1>
+<h2 id="implementation-4"><a class="header" href="#implementation-4">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=quick_sort.cpp"></script>
-<h1><a class="header" href="#heap-sort" id="heap-sort">Heap sort</a></h1>
-<h2><a class="header" href="#implementation-5" id="implementation-5">Implementation</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="heap-sort"><a class="header" href="#heap-sort">Heap sort</a></h1>
+<h2 id="implementation-5"><a class="header" href="#implementation-5">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=heap_sort.cpp"></script>
-<h1><a class="header" href="#graph" id="graph">Graph</a></h1>
-<h1><a class="header" href="#shortest-path" id="shortest-path">Shortest path</a></h1>
-<h1><a class="header" href="#floydwarshall" id="floydwarshall">Floyd–Warshall</a></h1>
-<h2><a class="header" href="#implementation-6" id="implementation-6">Implementation</a></h2>
-<script src="https://gist.github.com/ChunMinChang/3bf18068195534a0acc45851fd718791.js?file=FloydWarshall.cpp"></script><h1><a class="header" href="#dijkstra" id="dijkstra">Dijkstra</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="graph"><a class="header" href="#graph">Graph</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shortest-path"><a class="header" href="#shortest-path">Shortest path</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="floydwarshall"><a class="header" href="#floydwarshall">Floyd–Warshall</a></h1>
+<h2 id="implementation-6"><a class="header" href="#implementation-6">Implementation</a></h2>
+<script src="https://gist.github.com/ChunMinChang/3bf18068195534a0acc45851fd718791.js?file=FloydWarshall.cpp"></script><div style="break-before: page; page-break-before: always;"></div><h1 id="dijkstra"><a class="header" href="#dijkstra">Dijkstra</a></h1>
 <p>In this article, the <em>Dijkstra</em> will be proved by <em>mathematical induction</em>.
 Suppose we have following variables:</p>
 <ul>
@@ -1426,7 +1411,7 @@ Suppose we have following variables:</p>
 <li>\( l(x, y) \) is the length of an edge from  \( x \) to  \( y \)</li>
 <li>\( d(x) \) is shortest path distance found by <em>Dijkstra</em> algorithm.</li>
 </ul>
-<h2><a class="header" href="#dijkstra-algorithm" id="dijkstra-algorithm">Dijkstra algorithm</a></h2>
+<h2 id="dijkstra-algorithm"><a class="header" href="#dijkstra-algorithm">Dijkstra algorithm</a></h2>
 <p>\[
 \begin{align}
 &amp; \text{Dijkstra(\( G, s \)):} \newline
@@ -1442,7 +1427,7 @@ Suppose we have following variables:</p>
 &amp; \space \space \space \space \space \space \space \space \space \space \space \space \space \space \space \space d(v) = d(u) + l(u, v)
 \end{align}
 \]</p>
-<h2><a class="header" href="#proof-by-mathematical-induction-2" id="proof-by-mathematical-induction-2">Proof by mathematical induction</a></h2>
+<h2 id="proof-by-mathematical-induction-2"><a class="header" href="#proof-by-mathematical-induction-2">Proof by mathematical induction</a></h2>
 <p><img src="graph/Dijkstra.png" alt="Dijkstra" /></p>
 <p><em>Proof</em>:
 For each \( x \in K, \space d(x) \) is the shortest path from \( s \) to  \( x \).</p>
@@ -1483,114 +1468,89 @@ so \( d(y) \ge d(n) \). (That's why \( n \) is chosen instead of \( y \).)</li>
 </ul>
 </li>
 </ol>
-<h2><a class="header" href="#simple-implementation" id="simple-implementation">Simple implementation</a></h2>
+<h2 id="simple-implementation"><a class="header" href="#simple-implementation">Simple implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/3bf18068195534a0acc45851fd718791.js?file=Dijkstra.cpp"></script>
-<h3><a class="header" href="#implementation-with-priority-queueheap" id="implementation-with-priority-queueheap">Implementation with priority-queue(heap)</a></h3>
+<h3 id="implementation-with-priority-queueheap"><a class="header" href="#implementation-with-priority-queueheap">Implementation with priority-queue(heap)</a></h3>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=Graph.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=ShortestPath.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=Dijkstra.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=Dijkstra.cpp"></script>
-<h2><a class="header" href="#references" id="references">References</a></h2>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
 <ul>
 <li><a href="http://web.cs.ucdavis.edu/%7Eamenta/w10/dijkstra.pdf">Proof for Dijkstra’s Algorithm</a></li>
 <li><a href="https://web.engr.oregonstate.edu/%7Eglencora/wiki/uploads/dijkstra-proof.pdf">Dijkstra’s algorithm: Correctness by induction</a></li>
 <li><a href="https://www.cs.auckland.ac.nz/software/AlgAnim/dij-proof.html">Proof of Dijkstra's Algorithm</a></li>
 <li><a href="https://chunminchang.gitbooks.io/cplusplus-learning-note/content/Appendix/Dijkstra.html">Proof of Dijkstra</a></li>
 </ul>
-<h1><a class="header" href="#bellman-ford-moore" id="bellman-ford-moore">Bellman-Ford-Moore</a></h1>
-<h2><a class="header" href="#simple-implementation-1" id="simple-implementation-1">Simple implementation</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bellman-ford-moore"><a class="header" href="#bellman-ford-moore">Bellman-Ford-Moore</a></h1>
+<h2 id="simple-implementation-1"><a class="header" href="#simple-implementation-1">Simple implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/3bf18068195534a0acc45851fd718791.js?file=BellmanFordMoore.cpp"></script>
-<h3><a class="header" href="#implementation-with-graph" id="implementation-with-graph">Implementation with graph</a></h3>
+<h3 id="implementation-with-graph"><a class="header" href="#implementation-with-graph">Implementation with graph</a></h3>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=Graph.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=ShortestPath.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=BFM.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=BFM.cpp"></script>
-<h1><a class="header" href="#shortest-path-faster-algorithm" id="shortest-path-faster-algorithm">Shortest Path Faster Algorithm</a></h1>
-<h2><a class="header" href="#implementation-7" id="implementation-7">Implementation</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shortest-path-faster-algorithm"><a class="header" href="#shortest-path-faster-algorithm">Shortest Path Faster Algorithm</a></h1>
+<h2 id="implementation-7"><a class="header" href="#implementation-7">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=Graph.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=ShortestPath.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=BFM.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=BFM.cpp"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=SPFA.h"></script>
 <script src="https://gist.github.com/ChunMinChang/e5d2c22038672d46b86ebab7c679d80b.js?file=SPFA.cpp"></script>
-<h1><a class="header" href="#minimal-spanning-tree" id="minimal-spanning-tree">Minimal spanning tree</a></h1>
-<h1><a class="header" href="#kruskal" id="kruskal">Kruskal</a></h1>
-<h2><a class="header" href="#implementation-8" id="implementation-8">Implementation</a></h2>
-<h3><a class="header" href="#graph-1" id="graph-1">Graph</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="minimal-spanning-tree"><a class="header" href="#minimal-spanning-tree">Minimal spanning tree</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="kruskal"><a class="header" href="#kruskal">Kruskal</a></h1>
+<h2 id="implementation-8"><a class="header" href="#implementation-8">Implementation</a></h2>
+<h3 id="graph-1"><a class="header" href="#graph-1">Graph</a></h3>
 <script src="https://gist.github.com/ChunMinChang/81862ff828866aa095e2f3626370beaf.js?file=Graph.h"></script>
-<h3><a class="header" href="#kruskal-1" id="kruskal-1">Kruskal</a></h3>
+<h3 id="kruskal-1"><a class="header" href="#kruskal-1">Kruskal</a></h3>
 <script src="https://gist.github.com/ChunMinChang/81862ff828866aa095e2f3626370beaf.js?file=Kruskal.h"></script>
 <script src="https://gist.github.com/ChunMinChang/81862ff828866aa095e2f3626370beaf.js?file=Kruskal.cpp"></script>
-<h3><a class="header" href="#disjointset" id="disjointset">DisjointSet</a></h3>
+<h3 id="disjointset"><a class="header" href="#disjointset">DisjointSet</a></h3>
 <script src="https://gist.github.com/ChunMinChang/81862ff828866aa095e2f3626370beaf.js?file=DisjointSet.h"></script>
-<h1><a class="header" href="#prim" id="prim">Prim</a></h1>
-<h2><a class="header" href="#implementation-9" id="implementation-9">Implementation</a></h2>
-<h3><a class="header" href="#graph-2" id="graph-2">Graph</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="prim"><a class="header" href="#prim">Prim</a></h1>
+<h2 id="implementation-9"><a class="header" href="#implementation-9">Implementation</a></h2>
+<h3 id="graph-2"><a class="header" href="#graph-2">Graph</a></h3>
 <script src="https://gist.github.com/ChunMinChang/81862ff828866aa095e2f3626370beaf.js?file=Graph.h"></script>
-<h3><a class="header" href="#prim-1" id="prim-1">Prim</a></h3>
+<h3 id="prim-1"><a class="header" href="#prim-1">Prim</a></h3>
 <script src="https://gist.github.com/ChunMinChang/81862ff828866aa095e2f3626370beaf.js?file=Prim.h"></script>
 <script src="https://gist.github.com/ChunMinChang/81862ff828866aa095e2f3626370beaf.js?file=Prim.cpp"></script>
-<h1><a class="header" href="#search" id="search">Search</a></h1>
-<h1><a class="header" href="#binary-search" id="binary-search">Binary search</a></h1>
-<h2><a class="header" href="#implementation-10" id="implementation-10">Implementation</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="search"><a class="header" href="#search">Search</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="binary-search"><a class="header" href="#binary-search">Binary search</a></h1>
+<h2 id="implementation-10"><a class="header" href="#implementation-10">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/ab8650e04f467a8b4f38da807a0d5797.js?file=binary_search.cpp"></script>
-<h1><a class="header" href="#interpolation-search" id="interpolation-search">Interpolation search</a></h1>
-<h2><a class="header" href="#implementation-11" id="implementation-11">Implementation</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="interpolation-search"><a class="header" href="#interpolation-search">Interpolation search</a></h1>
+<h2 id="implementation-11"><a class="header" href="#implementation-11">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/ab8650e04f467a8b4f38da807a0d5797.js?file=interpolation_search.cpp"></script>
-<h1><a class="header" href="#fibonacci-search" id="fibonacci-search">Fibonacci search</a></h1>
-<h2><a class="header" href="#implementation-12" id="implementation-12">Implementation</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fibonacci-search"><a class="header" href="#fibonacci-search">Fibonacci search</a></h1>
+<h2 id="implementation-12"><a class="header" href="#implementation-12">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/ab8650e04f467a8b4f38da807a0d5797.js?file=fibonacci_search.cpp"></script>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
-
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-
-                
             </nav>
 
         </div>
 
-        
-
-        
-
-        
-        
-        
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
-
-        
-
-        
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
-
-        
-        
         <script type="text/javascript">
         window.addEventListener('load', function() {
             MathJax.Hub.Register.StartupHook('End', function() {
@@ -1598,8 +1558,5 @@ so \( d(y) \ge d(n) \). (That's why \( n \) is chosen instead of \( y \).)</li>
             });
         });
         </script>
-        
-        
-
     </body>
 </html>

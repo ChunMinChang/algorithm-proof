@@ -4,42 +4,35 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Selection sort - Algorithm Proof</title>
-        
-
+        <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
         <link rel="stylesheet" href="../css/print.css" media="print">
-
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="../fonts/fonts.css">
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
         <link rel="stylesheet" href="../tomorrow-night.css">
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
-
-        
         <!-- MathJax -->
         <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -92,7 +85,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -109,11 +101,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Algorithm Proof</h1>
@@ -122,14 +112,12 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -137,8 +125,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -150,8 +136,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#selection-sort" id="selection-sort">Selection sort</a></h1>
-<h2><a class="header" href="#idea" id="idea">Idea</a></h2>
+                        <h1 id="selection-sort"><a class="header" href="#selection-sort">Selection sort</a></h1>
+<h2 id="idea"><a class="header" href="#idea">Idea</a></h2>
 <p>The concept is quite straight.
 If we could get the minimal value from list <strong>one by one</strong>,
 then we could re-arrange the list from minimal to maximal values.</p>
@@ -197,7 +183,7 @@ so we move it into \(L_{sorted}\). Now,
 In the same way, to sort the list from maximal to minimal values,
 the only different is to pick the maximal value from list each round
 instead of minimal value.</p>
-<h3><a class="header" href="#how-to-get-minimalor-maximal-value" id="how-to-get-minimalor-maximal-value">How to get minimal(or maximal) value</a></h3>
+<h3 id="how-to-get-minimalor-maximal-value"><a class="header" href="#how-to-get-minimalor-maximal-value">How to get minimal(or maximal) value</a></h3>
 <p>The way to get minimal(or maximal) items in \(L\)
 is to linearly search the whole list:
 \[
@@ -221,7 +207,7 @@ or
 \]
 , where \(L[i]\) is the \(i\)th element in the list \(L\)
 and \(N\) is the length of \(L\).</p>
-<h3><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list" id="dividing-one-list-into-unsorted-list-and-sorted-list">Dividing one list into unsorted list and sorted list</a></h3>
+<h3 id="dividing-one-list-into-unsorted-list-and-sorted-list"><a class="header" href="#dividing-one-list-into-unsorted-list-and-sorted-list">Dividing one list into unsorted list and sorted list</a></h3>
 <p>In implementation, we usually divide the source list,
 which needs to be sorted, into two parts. One is sorted, the other is unsorted.
 This is better for memory usage than
@@ -259,7 +245,7 @@ from \(L_{unsorted}\) to \(L_{sorted}\), so
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#algorithm" id="algorithm">Algorithm</a></h2>
+<h2 id="algorithm"><a class="header" href="#algorithm">Algorithm</a></h2>
 <p>\[
 \begin{aligned}
 &amp; SelectionSort(L): \newline
@@ -328,8 +314,8 @@ in \(L[1...N]\), so we don't need to do anything</li>
 </ul>
 </li>
 </ul>
-<h3><a class="header" href="#proof" id="proof">Proof</a></h3>
-<h4><a class="header" href="#proof-by-contradiction" id="proof-by-contradiction">Proof by contradiction</a></h4>
+<h3 id="proof"><a class="header" href="#proof">Proof</a></h3>
+<h4 id="proof-by-contradiction"><a class="header" href="#proof-by-contradiction">Proof by contradiction</a></h4>
 <ul>
 <li>Assume this method can <strong>not</strong> give us an ordered list</li>
 <li>so it exists one \(L[p] &gt; L[q]\), where \(p &lt; q\), in the result list \(L\)</li>
@@ -340,7 +326,7 @@ because \(p &lt; q\) in the result list \(L\)</li>
 <li>It means \(L[p] &lt; L[q]\) and it is contradictory to the assumption</li>
 <li>Thus, the assumption is wrong. This method will give us an ordered list.</li>
 </ul>
-<h2><a class="header" href="#complexity" id="complexity">Complexity</a></h2>
+<h2 id="complexity"><a class="header" href="#complexity">Complexity</a></h2>
 <p>We need to search whole \(L_{unsorted}\) to find a minimal(or maximal) item.
 Suppose \(\vert L_{unsorted} \vert = N\) at first.
 (the length of \(L_{unsorted}\) is \(N\)).</p>
@@ -364,74 +350,45 @@ N + (N - 1) + (N - 2) + .... + 1
 times to move all the items into \(L_{sorted}\).
 Thus, the complexity is \(\mathcal{O}(N^2)\),
 where the \(N\) is the length of the list \(L\).</p>
-<h2><a class="header" href="#implementation" id="implementation">Implementation</a></h2>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <script src="https://gist.github.com/ChunMinChang/dee9f3bd2ceab69726373ae006016edb.js?file=selection_sort.cpp"></script>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../sorting/sorting.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
-
-                        
                             <a rel="next" href="../sorting/insertion_sort.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../sorting/sorting.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
-
-                
                     <a rel="next" href="../sorting/insertion_sort.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
-
-        
-
-        
-        
-        
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
-
-        
-
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
-
-        
-
     </body>
 </html>
